@@ -14,6 +14,8 @@ packages:
 
 reference_datetime: "2013-06-01 00:00:00"
 remotes:
+- "url": "https://github.com/lendcoinfoundation/lendcoin.git"
+  "dir": "lendcoin"
 files:
 - "qt-win32-4.8.5-gitian-r3.zip"
 - "qt-win64-4.8.5-gitian-r3.zip"
@@ -93,4 +95,3 @@ script: |
   mkdir -p $TEMPDIR
   cd $TEMPDIR
   tar -xvf $HOME/build/paycoin/$DISTNAME | sort | tar --no-recursion -cT /dev/stdin --mode='u+rw,go+r-w,a+X' --owner=0 --group=0 --mtime="$REFERENCE_DATETIME" | gzip -n > $OUTDIR/src/$DISTNAME.gz
-
