@@ -1,5 +1,5 @@
 ---
-name: "paycoin-deps"
+name: "lendcoin-deps"
 suites:
 - "precise"
 architectures:
@@ -81,4 +81,4 @@ script: |
   done
   #
   cd $STAGING
-  find include lib bin host | sort | zip -X@ $OUTDIR/paycoin-deps-linux${GBUILD_BITS}-gitian-r5.zip
+  find include lib bin host | sort | zip -X@ $OUTDIR/lendcoin-deps-linux${GBUILD_BITS}-gitian-r5.zip
