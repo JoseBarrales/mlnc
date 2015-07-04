@@ -16,8 +16,8 @@ packages:
 - "libqt4-dev"
 reference_datetime: "2011-01-30 00:00:00"
 remotes:
-- "url": "http://github.com/lendcoinfoundation/lendcoin.git"
-  "dir": "lendcoin"
+- "url": "https://github.com/JoseBarrales/paycoin.git"
+  "dir": "paycoin"
 files:
 - "lendcoin-deps-linux32-gitian-r5.zip"
 - "lendcoin-deps-linux64-gitian-r5.zip"
