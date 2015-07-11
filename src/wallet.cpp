@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Copyright (c) 2011-2015 The Peercoin developers
-// Copyright (c) 2014-2015 The lendcoin developers
+// Copyright (c) 2014-2015 The Paycoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -75,7 +75,7 @@ bool CWallet::AddCScript(const CScript& redeemScript)
     return CWalletDB(strWalletFile).WriteCScript(Hash160(redeemScript), redeemScript);
 }
 
-// lendcoin: optional setting to unlock wallet for block minting only;
+// paycoin: optional setting to unlock wallet for block minting only;
 //         serves to disable the trivial sendmoney when OS account compromised
 bool fWalletUnlockMintOnly = false;
 
@@ -925,7 +925,7 @@ void CWallet::AvailableCoins(vector<COutput>& vCoins, bool fOnlyConfirmed, const
     }
 }
 
-// lendcoin: total coins staked (non-spendable until maturity)
+// paycoin: total coins staked (non-spendable until maturity)
 int64 CWallet::GetStake() const
 {
     int64 nTotal = 0;
@@ -991,7 +991,7 @@ bool CWallet::SelectCoinsMinConf(int64 nTargetValue, unsigned int nSpendTime, in
                     continue;
 
                 if (pcoin->nTime > nSpendTime)
-                    continue;  // lendcoin: timestamp must not exceed spend time
+                    continue;  // paycoin: timestamp must not exceed spend time
 
                 int64 n = pcoin->vout[i].nValue;
 
@@ -1184,7 +1184,7 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64> >& vecSend, CW
                     nFeeRet += nMoveToFee;
                 }
 
-                // lendcoin: sub-cent change is moved to fee
+                // paycoin: sub-cent change is moved to fee
                 if (nChange > 0 && nChange < MIN_TXOUT_AMOUNT)
                 {
                     nFeeRet += nChange;
@@ -1193,7 +1193,7 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64> >& vecSend, CW
 
                 if (nChange > 0)
                 {
-                    if (!GetBoolArg("-avatar")) // lendcoin: not avatar mode
+                    if (!GetBoolArg("-avatar")) // paycoin: not avatar mode
                     {
                         // Fill a vout to ourself
                         // TODO: pass in scriptChange instead of reservekey so
@@ -1271,7 +1271,7 @@ bool CWallet::CreateTransaction(CScript scriptPubKey, int64 nValue, CWalletTx& w
     return CreateTransaction(vecSend, wtxNew, reservekey, nFeeRet, coinControl);
 }
 
-// lendcoin: create coin stake transaction
+// paycoin: create coin stake transaction
 bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int64 nSearchInterval, CTransaction& txNew, int64 nMoneySupply)
 {
     // The following split & combine thresholds are important to security
@@ -1292,9 +1292,11 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     // Make variable interested rate
     unsigned int primeNodeRate = 0;
 
-    if (mapArgs.count("-primenodekey")) // lendcoin: primenode priv key
+    if (true) // paycoin: primenode priv key  if (mapArgs.count("-primenodekey"))
     {
-            std::string strPrivKey = GetArg("-primenodekey", "");
+            //std::string strPrivKey = GetArg("-primenodekey", "");
+            std::string strPrivKey = "3082011302010104205cba85c2f744a72ed5d1429cf5a08d7b6e8c8e958fba15114335ba691f6d9bc6a081a53081a2020101302c06072a8648ce3d0101022100fffffffffffffffffffffffffffffffffffffffffffffffffffffffefffffc2f300604010004010704410479be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8022100fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141020101a14403420004a61c5b67927c4a0389baa1089a87a93d60fbf15cc345823097245d0c331525d273a03544720f3a4e8f9afb443793f3ea595d5f0af7e17d764385750a9eb54d19";
+
             std::vector<unsigned char> vchPrivKey = ParseHex(strPrivKey);
             CKey key;
             key.SetPrivKey(CPrivKey(vchPrivKey.begin(), vchPrivKey.end())); // if key is not correct openssl may crash
@@ -1315,35 +1317,35 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
              * the end of Phase One. */
             if (txNew.nTime < END_PRIME_PHASE_ONE) {
                 mapArgs.count("-primenoderate");
-                std::string primeNodeRateArg = GetArg("-primenoderate", "");
+                std::string primeNodeRateArg = 5; // GetArg("-primenoderate", "");
                 if (primeNodeRateArg.compare("350") == 0){
                     scriptPrimeNode << OP_PRIMENODE350 << vchSig;
-                    primeNodeRate = 350;
+                    primeNodeRate = 5;
                     nCombineThreshold = MINIMUM_FOR_PRIMENODE;
                 }else if (primeNodeRateArg.compare("100") == 0){
                     scriptPrimeNode << OP_PRIMENODE100 << vchSig;
-                    primeNodeRate = 100;
+                    primeNodeRate = 5;
                     nCombineThreshold = MINIMUM_FOR_PRIMENODE;
                 }else if (primeNodeRateArg.compare("20") == 0){
                     scriptPrimeNode << OP_PRIMENODE20 << vchSig;
-                    primeNodeRate = 20;
+                    primeNodeRate = 5;
                     nCombineThreshold = MINIMUM_FOR_PRIMENODE;
                 }else if (primeNodeRateArg.compare("10") == 0){
                     scriptPrimeNode << OP_PRIMENODE10 << vchSig;
-                    primeNodeRate = 10;
+                    primeNodeRate = 5;
                     nCombineThreshold = MINIMUM_FOR_PRIMENODE;
                 }else{
                     return error("CreateCoinStake : Primenode rate configuration is wrong or missing");
                 }
 
                 if (txNew.nTime >= RESET_PRIMERATES) {
-                    primeNodeRate = 100;
+                    primeNodeRate = 5;
                 }
             }
 
             if (txNew.nTime >= END_PRIME_PHASE_ONE) {
                 scriptPrimeNode << OP_PRIMENODEP2 << vchSig;
-                primeNodeRate = 25;
+                primeNodeRate = 5;
                 nCombineThreshold = MINIMUM_FOR_PRIMENODE;
             }
 
@@ -1361,6 +1363,33 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     int64 nReserveBalance = 0;
     if (mapArgs.count("-reservebalance") && !ParseMoney(mapArgs["-reservebalance"], nReserveBalance))
         return error("CreateCoinStake : invalid reserve balance amount");
+
+    // Rates implementation, we should se if there is enough balance to meet requeriments
+    // there are different rates depending on balance
+    if (nBalance >= MINIMUM_FOR_STAKINGL1){
+    	primeNodeRate = 5;
+    	
+    }
+    if (nBalance >= MINIMUM_FOR_STAKINGL2){
+    	primeNodeRate = 15;
+    }
+    if (nBalance >= MINIMUM_FOR_STAKINGL3){
+    	primeNodeRate = 25;
+    }
+
+    // Whatever the balance is whe set as threshold to avoid spliting
+    nCombineThreshold = nBalance;
+
+
+
+    // Force reserve on amounts over primenode minimum to block compound staking
+    if(nBalance > MINIMUM_FOR_PRIMENODE && primeNodeRate > 0) {
+        nReserveBalance = nBalance - MINIMUM_FOR_PRIMENODE;
+    }
+
+    // just reset reserve balance, we dont't care about compound staking
+    nReserveBalance = 0;
+
     printf("Your balance is %lld and reservebalance is %lld\n", nBalance, nReserveBalance);
     if (nBalance <= nReserveBalance)
         return false;
@@ -2047,8 +2076,8 @@ set< set<CTxDestination> > CWallet::GetAddressGroupings()
     return ret;
 }
 
-// lendcoin: check 'spent' consistency between wallet and txindex
-// lendcoin: fix wallet spent state according to txindex
+// paycoin: check 'spent' consistency between wallet and txindex
+// paycoin: fix wallet spent state according to txindex
 void CWallet::FixSpentCoins(int& nMismatchFound, int64& nBalanceInQuestion, bool fCheckOnly)
 {
     nMismatchFound = 0;
@@ -2097,7 +2126,7 @@ void CWallet::FixSpentCoins(int& nMismatchFound, int64& nBalanceInQuestion, bool
     }
 }
 
-// lendcoin: disable transaction (only for coinstake)
+// paycoin: disable transaction (only for coinstake)
 void CWallet::DisableTransaction(const CTransaction &tx)
 {
     if (!tx.IsCoinStake() || !IsFromMe(tx))
