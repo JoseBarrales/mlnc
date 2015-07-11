@@ -74,7 +74,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     rpcConsole(0)
 {
     resize(850, 550);
-    setWindowTitle(tr("Paycoin Wallet"));
+    setWindowTitle(tr("Lendcoin Wallet"));
 #ifndef Q_WS_MAC
     setWindowIcon(QIcon(":icons/paycoin_icon"));
 #else
@@ -222,7 +222,7 @@ void BitcoinGUI::createActions()
     tabGroup->addAction(receiveCoinsAction);
 
     sendCoinsAction = new QAction(QIcon(":/icons/send"), tr("&Send coins"), this);
-    sendCoinsAction->setToolTip(tr("Send coins to a Paycoin address"));
+    sendCoinsAction->setToolTip(tr("Send coins to a Lendcoin address"));
     sendCoinsAction->setCheckable(true);
     sendCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_2));
     tabGroup->addAction(sendCoinsAction);
@@ -258,17 +258,17 @@ void BitcoinGUI::createActions()
     quitAction->setToolTip(tr("Quit application"));
     quitAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
     quitAction->setMenuRole(QAction::QuitRole);
-    aboutAction = new QAction(QIcon(":/icons/paycoin_tooltip"), tr("&About Paycoin"), this);
-    aboutAction->setToolTip(tr("Show information about Paycoin"));
+    aboutAction = new QAction(QIcon(":/icons/paycoin_tooltip"), tr("&About Lendcoin"), this);
+    aboutAction->setToolTip(tr("Show information about Lendcoin"));
     aboutAction->setMenuRole(QAction::AboutRole);
     aboutQtAction = new QAction(tr("About &Qt"), this);
     aboutQtAction->setToolTip(tr("Show information about Qt"));
     aboutQtAction->setMenuRole(QAction::AboutQtRole);
     optionsAction = new QAction(QIcon(":/icons/options"), tr("&Options..."), this);
-    optionsAction->setToolTip(tr("Modify configuration options for Paycoin"));
+    optionsAction->setToolTip(tr("Modify configuration options for Lendcoin"));
     optionsAction->setMenuRole(QAction::PreferencesRole);
-    toggleHideAction = new QAction(QIcon(":/icons/paycoin_tooltip"), tr("Show/Hide &Paycoin"), this);
-    toggleHideAction->setToolTip(tr("Show or hide the Paycoin window"));
+    toggleHideAction = new QAction(QIcon(":/icons/paycoin_tooltip"), tr("Show/Hide &Lendcoin"), this);
+    toggleHideAction->setToolTip(tr("Show or hide the Lendcoin window"));
     exportAction = new QAction(QIcon(":/icons/export"), tr("&Export..."), this);
     exportAction->setToolTip(tr("Export the data in the current tab to a file"));
     encryptWalletAction = new QAction(QIcon(":/icons/lock_closed"), tr("&Encrypt Wallet"), this);
@@ -515,7 +515,7 @@ void BitcoinGUI::setNumConnections(int count)
     default: icon = ":/icons/connect_4"; break;
     }
     labelConnectionsIcon->setPixmap(QIcon(icon).pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
-    labelConnectionsIcon->setToolTip(tr("%n active connection(s) to Paycoin network", "", count));
+    labelConnectionsIcon->setToolTip(tr("%n active connection(s) to Lendcoin network", "", count));
 }
 
 void BitcoinGUI::setNumBlocks(int count)
