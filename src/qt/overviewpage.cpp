@@ -1,5 +1,9 @@
 #include "overviewpage.h"
 #include "ui_overviewpage.h"
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of 2551045... first CIM
 #include "walletmodel.h"
 #include "bitcoinunits.h"
 #include "optionsmodel.h"
@@ -186,6 +190,7 @@ void OverviewPage::displayUnitChanged()
     ui->listTransactions->update();
 }
 
+<<<<<<< HEAD
 
 
 
@@ -193,3 +198,5 @@ void OverviewPage::on_pushButton_clicked()
 {
 
 }
+=======
+>>>>>>> parent of 2551045... first CIM

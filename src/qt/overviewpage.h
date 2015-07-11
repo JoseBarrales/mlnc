@@ -42,7 +42,6 @@ private:
 
 private slots:
     void displayUnitChanged();
-    void on_pushButton_clicked();
 };
 
 #endif // OVERVIEWPAGE_H
