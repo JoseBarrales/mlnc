@@ -1,6 +1,6 @@
 # Copyright (c) 2009-2010 Satoshi Nakamoto
 # Copyright (c) 2012 The Peercoin developers
-# Copyright (c) 2015 The lendcoin developers
+# Copyright (c) 2015 The Paycoin developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -52,10 +52,10 @@
 #     mkdir miniupnpc
 #     cp *.h miniupnpc/
 #
-# - Build lendcoind.exe
+# - Build paycoind.exe
 #   in MinGW MSYS
-#     cd lendcoin/src
-#     make lendcoind.exe -f makefile.mingw USE_UPNP=1
+#     cd paycoin/src
+#     make paycoind.exe -f makefile.mingw USE_UPNP=1
 #
 #
 
@@ -124,12 +124,12 @@ OBJS= \
     obj/primekeys.o
 
 
-all: lendcoind.exe
+all: paycoind.exe
 
 obj/%.o: %.cpp $(HEADERS)
 	g++ -c $(CFLAGS) -o $@ $<
 
-lendcoind.exe: $(OBJS:obj/%=obj/%)
+paycoind.exe: $(OBJS:obj/%=obj/%)
 	g++ $(CFLAGS) -o $@ $(LIBPATHS) $^ $(LIBS)
 
 TESTOBJS := $(patsubst test/%.cpp,obj-test/%.o,$(wildcard test/*.cpp))
@@ -137,11 +137,11 @@ TESTOBJS := $(patsubst test/%.cpp,obj-test/%.o,$(wildcard test/*.cpp))
 obj-test/%.o: test/%.cpp $(HEADERS)
 	g++ -c $(TESTDEFS) $(CFLAGS) -o $@ $<
 
-test_lendcoin.exe: $(TESTOBJS) $(filter-out obj/init.o,$(OBJS:obj/%=obj/%))
+test_paycoin.exe: $(TESTOBJS) $(filter-out obj/init.o,$(OBJS:obj/%=obj/%))
 	g++ $(CFLAGS) -o $@ $(LIBPATHS) $^ -lboost_unit_test_framework $(LIBS)
 
 clean:
-	-del /Q lendcoind test_lendcoin
+	-del /Q paycoind test_paycoin
 	-del /Q obj\*
 	-del /Q obj-test\*
 	-del /Q build.h
