@@ -15,8 +15,8 @@
 #include <string>
 #include "uint256.h"
 
-#define PAYCOIN_PORT  9559
-#define RPC_PORT     9558
+#define PAYCOIN_PORT  8998
+#define RPC_PORT     8999
 #define TESTNET_PORT 9000
 #define TESTNET_RPC_PORT 9001
 

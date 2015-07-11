@@ -51,20 +51,17 @@ static const int STAKE_MAX_AGE = 60 * 60 * 24 * 5; // stake age of full weight
 //static const int STAKE_MAX_AGE = 60 * 2; // stake age of full weight
 static const int STAKE_START_TIME = 1418470264; // Sat 13 Dec 2014 06:31:04 AM EST
 //static const int STAKE_START_TIME = 1418345400; // Thu 11 Dec 2014 05:30:00 PM EST
-static const unsigned int POW_START_TIME = 1435827229; // Fri 12 Dec 2014 12:00:00 PM EST
+static const unsigned int POW_START_TIME = 1418403600; // Fri 12 Dec 2014 12:00:00 PM EST
 //static const unsigned int POW_START_TIME = 1418345100; // Thu 11 Dec 2014 05:00:00 PM EST
-static const unsigned int POW_END_TIME = 1436259229; // Sun 21 Dec 2014 12:00:00 PM EST
+static const unsigned int POW_END_TIME = 1419181200; // Sun 21 Dec 2014 12:00:00 PM EST
 //static const unsigned int POW_END_TIME = 1418345700; // Thu 11 Dec 2014 05:40:00 PM EST
 // MODIFIER_INTERVAL: time to elapse before new modifier is computed
 //static const unsigned int MODIFIER_INTERVAL = 6 * 60 * 60;
 static const unsigned int MODIFIER_INTERVAL = 10 * 60;
 //static const unsigned int MODIFIER_INTERVAL = 10;
 static const int64 NUMBER_OF_PRIMENODE = 50;
-static const int64 MINIMUM_FOR_ORION = 1 * COIN;
+static const int64 MINIMUM_FOR_ORION = 50 * COIN;
 static const int64 MINIMUM_FOR_PRIMENODE = 125000 * COIN;
-static const int64 MINIMUM_FOR_STAKINGL1 = 0.1 * COIN;
-static const int64 MINIMUM_FOR_STAKINGL2 = 20000 * COIN;
-static const int64 MINIMUM_FOR_STAKINGL3 = 50000 * COIN;
 static const int MAX_TIME_SINCE_BEST_BLOCK = 10; // how many seconds to wait before sending next PushGetBlocks()
 // Reset all primenode stakerates to 100% after the given date
 static const unsigned int RESET_PRIMERATES = 1429531200; // Mon, 20 Apr 2015 12:00:00 GMT
