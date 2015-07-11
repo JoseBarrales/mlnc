@@ -187,7 +187,3 @@ void OverviewPage::displayUnitChanged()
     ui->listTransactions->update();
 }
 
-void OverviewPage::authenticateWithCIMS()
-{
-
-}
