@@ -264,8 +264,7 @@ FORMS += \
     src/qt/forms/rpcconsole.ui \
     src/qt/forms/multisigaddressentry.ui \
     src/qt/forms/multisiginputentry.ui \
-    src/qt/forms/multisigdialog.ui \
-    src/qt/forms/authcims.ui
+    src/qt/forms/multisigdialog.ui
 
 contains(USE_QRCODE, 1) {
 HEADERS += src/qt/qrcodedialog.h
