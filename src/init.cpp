@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Copyright (c) 2011-2015 The Peercoin developers
-// Copyright (c) 2014-2015 The Paycoin developers
+// Copyright (c) 2014-2015 The lendcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include "db.h"
@@ -79,7 +79,7 @@ void Shutdown(void* parg)
         delete pwalletMain;
         CreateThread(ExitTimeout, NULL);
         Sleep(50);
-        printf("Paycoin exiting\n\n");
+        printf("lendcoin exiting\n\n");
         fExit = true;
 #ifndef QT_GUI
         // ensure non-UI client get's exited here, but let Bitcoin-Qt reach return 0; in bitcoin.cpp
@@ -145,7 +145,7 @@ bool static Bind(const CService &addr) {
     std::string strError;
     if (!BindListenPort(addr, strError))
     {
-        ThreadSafeMessageBox(strError, _("Paycoin"), wxOK | wxMODAL);
+        ThreadSafeMessageBox(strError, _("lendcoin"), wxOK | wxMODAL);
         return false;
     }
     return true;
@@ -193,15 +193,15 @@ bool AppInit2(int argc, char* argv[])
     if (mapArgs.count("-?") || mapArgs.count("--help"))
     {
         string strUsage = string() +
-          _("Paycoin version") + " " + FormatFullVersion() + "\n\n" +
+          _("lendcoin version") + " " + FormatFullVersion() + "\n\n" +
           _("Usage:") + "\t\t\t\t\t\t\t\t\t\t\n" +
-            "  paycoind [options]                   \t  " + "\n" +
-            "  paycoind [options] <command> [params]\t  " + _("Send command to -server or paycoind") + "\n" +
-            "  paycoind [options] help              \t\t  " + _("List commands") + "\n" +
-            "  paycoind [options] help <command>    \t\t  " + _("Get help for a command") + "\n" +
+            "  lendcoind [options]                   \t  " + "\n" +
+            "  lendcoind [options] <command> [params]\t  " + _("Send command to -server or lendcoind") + "\n" +
+            "  lendcoind [options] help              \t\t  " + _("List commands") + "\n" +
+            "  lendcoind [options] help <command>    \t\t  " + _("Get help for a command") + "\n" +
           _("Options:") + "\n" +
-            "  -conf=<file>     \t\t  " + _("Specify configuration file (default: paycoin.conf)") + "\n" +
-            "  -pid=<file>      \t\t  " + _("Specify pid file (default: paycoind.pid)") + "\n" +
+            "  -conf=<file>     \t\t  " + _("Specify configuration file (default: lendcoin.conf)") + "\n" +
+            "  -pid=<file>      \t\t  " + _("Specify pid file (default: lendcoind.pid)") + "\n" +
             "  -gen             \t\t  " + _("Generate coins") + "\n" +
             "  -gen=0           \t\t  " + _("Don't generate coins") + "\n" +
             "  -min             \t\t  " + _("Start minimized") + "\n" +
@@ -269,7 +269,7 @@ bool AppInit2(int argc, char* argv[])
             "  -checklevel=<n>  \t\t  " + _("How thorough the block verification is (0-6, default: 1)") + "\n";
 
         strUsage += string() +
-            _("\nSSL options: (see the Paycoin Wiki for SSL setup instructions)") + "\n" +
+            _("\nSSL options: (see the lendcoin Wiki for SSL setup instructions)") + "\n" +
             "  -rpcssl                                \t  " + _("Use OpenSSL (https) for JSON-RPC connections") + "\n" +
             "  -rpcsslcertificatechainfile=<file.cert>\t  " + _("Server certificate file (default: server.cert)") + "\n" +
             "  -rpcsslprivatekeyfile=<file.pem>       \t  " + _("Server private key (default: server.pem)") + "\n" +
@@ -315,7 +315,7 @@ bool AppInit2(int argc, char* argv[])
 
 #ifndef QT_GUI
     for (int i = 1; i < argc; i++)
-        if (!IsSwitchChar(argv[i][0]) && !(strlen(argv[i]) >= 7 && strncasecmp(argv[i], "paycoin:", 7) == 0))
+        if (!IsSwitchChar(argv[i][0]) && !(strlen(argv[i]) >= 7 && strncasecmp(argv[i], "lendcoin:", 7) == 0))
             fCommandLine = true;
 
     if (fCommandLine)
@@ -368,7 +368,7 @@ bool AppInit2(int argc, char* argv[])
     static boost::interprocess::file_lock lock(pathLockFile.string().c_str());
     if (!lock.try_lock())
     {
-        ThreadSafeMessageBox(strprintf(_("Cannot obtain a lock on data directory %s.  Paycoin is probably already running."), GetDataDir().string().c_str()), _("Lendcoin"), wxOK|wxMODAL);
+        ThreadSafeMessageBox(strprintf(_("Cannot obtain a lock on data directory %s.  lendcoin is probably already running."), GetDataDir().string().c_str()), _("Lendcoin"), wxOK|wxMODAL);
         return false;
     }
 
@@ -421,10 +421,10 @@ bool AppInit2(int argc, char* argv[])
         if (nLoadWalletRet == DB_CORRUPT)
             strErrors << _("Error loading wallet.dat: Wallet corrupted") << "\n";
         else if (nLoadWalletRet == DB_TOO_NEW)
-            strErrors << _("Error loading wallet.dat: Wallet requires newer version of Paycoin") << "\n";
+            strErrors << _("Error loading wallet.dat: Wallet requires newer version of lendcoin") << "\n";
         else if (nLoadWalletRet == DB_NEED_REWRITE)
         {
-            strErrors << _("Wallet needed to be rewritten: restart Paycoin to complete") << "\n";
+            strErrors << _("Wallet needed to be rewritten: restart lendcoin to complete") << "\n";
             printf("%s", strErrors.str().c_str());
             ThreadSafeMessageBox(strErrors.str(), _("Lendcoin"), wxOK | wxICON_ERROR | wxMODAL);
             return false;
@@ -564,7 +564,7 @@ bool AppInit2(int argc, char* argv[])
         BOOST_FOREACH(std::string snet, mapMultiArgs["-noproxy"]) {
             enum Network net = ParseNetwork(snet);
             if (net == NET_UNROUTABLE) {
-                ThreadSafeMessageBox(_("Unknown network specified in -noproxy"), _("Paycoin"), wxOK | wxMODAL);
+                ThreadSafeMessageBox(_("Unknown network specified in -noproxy"), _("lendcoin"), wxOK | wxMODAL);
                 return false;
             }
             SetNoProxy(net);
@@ -662,7 +662,7 @@ bool AppInit2(int argc, char* argv[])
             ThreadSafeMessageBox(_("Warning: -paytxfee is set very high.  This is the transaction fee you will pay if you send a transaction."), _("Lendcoin"), wxOK | wxICON_EXCLAMATION | wxMODAL);
     }
 
-    if (mapArgs.count("-reservebalance")) // paycoin: reserve balance amount
+    if (mapArgs.count("-reservebalance")) // lendcoin: reserve balance amount
     {
         int64 nReserveBalance = 0;
         if (!ParseMoney(mapArgs["-reservebalance"], nReserveBalance))
@@ -672,7 +672,7 @@ bool AppInit2(int argc, char* argv[])
         }
     }
 
-    if (mapArgs.count("-checkpointkey")) // paycoin: checkpoint master priv key
+    if (mapArgs.count("-checkpointkey")) // lendcoin: checkpoint master priv key
     {
         if (!Checkpoints::SetCheckpointPrivKey(GetArg("-checkpointkey", "")))
             ThreadSafeMessageBox(_("Unable to sign checkpoint, wrong checkpointkey?\n"), _("Lendcoin"), wxOK | wxMODAL);

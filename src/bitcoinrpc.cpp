@@ -1,7 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Copyright (c) 2011-2015 The Peercoin developers
-// Copyright (c) 2014-2015 The Paycoin developers
+// Copyright (c) 2014-2015 The Lendcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -393,10 +393,10 @@ Value stop(const Array& params, bool fHelp)
     if (fHelp || params.size() != 0)
         throw runtime_error(
             "stop\n"
-            "Stop Paycoin server.");
+            "Stop Lendcoin server.");
     // Shutdown will take long enough that the response should get back
     StartShutdown();
-    return "Paycoin server stopping";
+    return "Lendcoin server stopping";
 }
 
 
@@ -564,7 +564,7 @@ Value gethashespersec(const Array& params, bool fHelp)
 }
 
 
-// paycoin: get network Gh/s estimate
+// Lendcoin: get network Gh/s estimate
 Value getnetworkghps(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 0)
@@ -692,7 +692,7 @@ Value getnewaddress(const Array& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "getnewaddress [account]\n"
-            "Returns a new Paycoin address for receiving payments.  "
+            "Returns a new Lendcoin address for receiving payments.  "
             "If [account] is specified (recommended), it is added to the address book "
             "so payments received with the address will be credited to [account].");
 
@@ -759,7 +759,7 @@ Value getaccountaddress(const Array& params, bool fHelp)
     if (fHelp || params.size() != 1)
         throw runtime_error(
             "getaccountaddress <account>\n"
-            "Returns the current Paycoin address for receiving payments to this account.");
+            "Returns the current Lendcoin address for receiving payments to this account.");
 
     // Parse the account first so we don't generate a key if there's an error
     string strAccount = AccountFromValue(params[0]);
@@ -777,12 +777,12 @@ Value setaccount(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 1 || params.size() > 2)
         throw runtime_error(
-            "setaccount <paycoinaddress> <account>\n"
+            "setaccount <Lendcoinaddress> <account>\n"
             "Sets the account associated with the given address.");
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(-5, "Invalid Paycoin address");
+        throw JSONRPCError(-5, "Invalid Lendcoin address");
 
 
     string strAccount;
@@ -807,12 +807,12 @@ Value getaccount(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "getaccount <paycoinaddress>\n"
+            "getaccount <Lendcoinaddress>\n"
             "Returns the account associated with the given address.");
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(-5, "Invalid Paycoin address");
+        throw JSONRPCError(-5, "Invalid Lendcoin address");
 
     string strAccount;
     map<CTxDestination, string>::iterator mi = pwalletMain->mapAddressBook.find(address.Get());
@@ -860,17 +860,17 @@ Value sendtoaddress(const Array& params, bool fHelp)
 {
     if (pwalletMain->IsCrypted() && (fHelp || params.size() < 2 || params.size() > 4))
         throw runtime_error(
-            "sendtoaddress <paycoinaddress> <amount> [comment] [comment-to]\n"
+            "sendtoaddress <Lendcoinaddress> <amount> [comment] [comment-to]\n"
             "<amount> is a real and is rounded to the nearest 0.000001\n"
             "requires wallet passphrase to be set with walletpassphrase first");
     if (!pwalletMain->IsCrypted() && (fHelp || params.size() < 2 || params.size() > 4))
         throw runtime_error(
-            "sendtoaddress <paycoinaddress> <amount> [comment] [comment-to]\n"
+            "sendtoaddress <Lendcoinaddress> <amount> [comment] [comment-to]\n"
             "<amount> is a real and is rounded to the nearest 0.000001");
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(-5, "Invalid Paycoin address");
+        throw JSONRPCError(-5, "Invalid Lendcoin address");
 
     // Amount
     int64 nAmount = AmountFromValue(params[1]);
@@ -898,7 +898,7 @@ Value signmessage(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 2)
         throw runtime_error(
-            "signmessage <paycoinaddress> <message>\n"
+            "signmessage <Lendcoinaddress> <message>\n"
             "Sign a message with the private key of an address");
 
     if (pwalletMain->IsLocked())
@@ -934,7 +934,7 @@ Value verifymessage(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 3)
         throw runtime_error(
-            "verifymessage <paycoinaddress> <signature> <message>\n"
+            "verifymessage <Lendcoinaddress> <signature> <message>\n"
             "Verify a signed message");
 
     string strAddress  = params[0].get_str();
@@ -971,14 +971,14 @@ Value getreceivedbyaddress(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 1 || params.size() > 2)
         throw runtime_error(
-            "getreceivedbyaddress <paycoinaddress> [minconf=1]\n"
-            "Returns the total amount received by <paycoinaddress> in transactions with at least [minconf] confirmations.");
+            "getreceivedbyaddress <Lendcoinaddress> [minconf=1]\n"
+            "Returns the total amount received by <Lendcoinaddress> in transactions with at least [minconf] confirmations.");
 
     // Bitcoin address
     CBitcoinAddress address = CBitcoinAddress(params[0].get_str());
     CScript scriptPubKey;
     if (!address.IsValid())
-        throw JSONRPCError(-5, "Invalid Paycoin address");
+        throw JSONRPCError(-5, "Invalid Lendcoin address");
     scriptPubKey.SetDestination(address.Get());
     if (!IsMine(*pwalletMain,scriptPubKey))
         return (double)0.0;
@@ -1269,18 +1269,18 @@ Value sendfrom(const Array& params, bool fHelp)
 {
     if (pwalletMain->IsCrypted() && (fHelp || params.size() < 3 || params.size() > 6))
         throw runtime_error(
-            "sendfrom <fromaccount> <topaycoinaddress> <amount> [minconf=1] [comment] [comment-to]\n"
+            "sendfrom <fromaccount> <toLendcoinaddress> <amount> [minconf=1] [comment] [comment-to]\n"
             "<amount> is a real and is rounded to the nearest 0.000001\n"
             "requires wallet passphrase to be set with walletpassphrase first");
     if (!pwalletMain->IsCrypted() && (fHelp || params.size() < 3 || params.size() > 6))
         throw runtime_error(
-            "sendfrom <fromaccount> <topaycoinaddress> <amount> [minconf=1] [comment] [comment-to]\n"
+            "sendfrom <fromaccount> <toLendcoinaddress> <amount> [minconf=1] [comment] [comment-to]\n"
             "<amount> is a real and is rounded to the nearest 0.000001");
 
     string strAccount = AccountFromValue(params[0]);
     CBitcoinAddress address(params[1].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(-5, "Invalid Paycoin address");
+        throw JSONRPCError(-5, "Invalid Lendcoin address");
     int64 nAmount = AmountFromValue(params[2]);
     if (nAmount < MIN_TXOUT_AMOUNT)
         throw JSONRPCError(-101, "Send amount too small");
@@ -1351,7 +1351,7 @@ Value sendmany(const Array& params, bool fHelp)
     {
         CBitcoinAddress address(s.name_);
         if (!address.IsValid())
-            throw JSONRPCError(-5, string("Invalid Paycoin address:")+s.name_);
+            throw JSONRPCError(-5, string("Invalid Lendcoin address:")+s.name_);
 
         if (setAddress.count(address))
             throw JSONRPCError(-8, string("Invalid parameter, duplicated address: ")+s.name_);
@@ -2001,7 +2001,7 @@ Value walletpassphrase(const Array& params, bool fHelp)
     int64* pnSleepTime = new int64(params[1].get_int64());
     CreateThread(ThreadCleanWalletPassphrase, pnSleepTime);
 
-    // paycoin: if user OS account compromised prevent trivial sendmoney commands
+    // Lendcoin: if user OS account compromised prevent trivial sendmoney commands
     if (params.size() > 2)
         fWalletUnlockMintOnly = params[2].get_bool();
     else
@@ -2096,7 +2096,7 @@ Value encryptwallet(const Array& params, bool fHelp)
     // slack space in .dat files; that is bad if the old data is
     // unencrypted private keys.  So:
     StartShutdown();
-    return "wallet encrypted; Paycoin server stopping, restart to run with encrypted wallet";
+    return "wallet encrypted; Lendcoin server stopping, restart to run with encrypted wallet";
 }
 
 class DescribeAddressVisitor : public boost::static_visitor<Object>
@@ -2138,8 +2138,8 @@ Value validateaddress(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "validateaddress <paycoinaddress>\n"
-            "Return information about <paycoinaddress>.");
+            "validateaddress <Lendcoinaddress>\n"
+            "Return information about <Lendcoinaddress>.");
 
     CBitcoinAddress address(params[0].get_str());
     bool isValid = address.IsValid();
@@ -2176,13 +2176,13 @@ Value getwork(const Array& params, bool fHelp)
             "If [data] is specified, tries to solve the block and returns true if it was successful.");
 
     if (vNodes.empty())
-        throw JSONRPCError(-9, "Paycoin is not connected!");
+        throw JSONRPCError(-9, "Lendcoin is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(-10, "Paycoin is downloading blocks...");
+        throw JSONRPCError(-10, "Lendcoin is downloading blocks...");
 
     if (pindexBest != NULL && pindexBest->nTime > POW_END_TIME)
-        throw JSONRPCError(-10, "Paycoin is currently on pure PoS state");
+        throw JSONRPCError(-10, "Lendcoin is currently on pure PoS state");
 
 
     typedef map<uint256, pair<CBlock*, CScript> > mapNewBlock_t;
@@ -2317,13 +2317,13 @@ Value getblocktemplate(const Array& params, bool fHelp)
 
     {
         if (vNodes.empty())
-            throw JSONRPCError(-9, "Paycoin is not connected!");
+            throw JSONRPCError(-9, "Lendcoin is not connected!");
 
         if (IsInitialBlockDownload())
-            throw JSONRPCError(-10, "Paycoin is downloading blocks...");
+            throw JSONRPCError(-10, "Lendcoin is downloading blocks...");
 
         if (pindexBest != NULL && pindexBest->nTime > POW_END_TIME)
-            throw JSONRPCError(-10, "Paycoin is currently on pure PoS state");
+            throw JSONRPCError(-10, "Lendcoin is currently on pure PoS state");
 
         // Update block
         static unsigned int nTransactionsUpdatedLast;
@@ -2454,7 +2454,7 @@ Value submitblock(const Array& params, bool fHelp)
         throw JSONRPCError(-22, "Block decode failed");
     }
 
-    // Paycoin: sign block
+    // Lendcoin: sign block
     if (!block.SignBlock(*pwalletMain))
         throw JSONRPCError(-100, "Unable to sign block, wallet locked?");
 
@@ -2507,7 +2507,7 @@ Value getblock(const Array& params, bool fHelp)
 }
 
 
-// paycoin: get information of sync-checkpoint
+// Lendcoin: get information of sync-checkpoint
 Value getcheckpoint(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 0)
@@ -2529,7 +2529,7 @@ Value getcheckpoint(const Array& params, bool fHelp)
 }
 
 
-// paycoin: reserve balance from being staked for network protection
+// Lendcoin: reserve balance from being staked for network protection
 Value reservebalance(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() > 2)
@@ -2571,7 +2571,7 @@ Value reservebalance(const Array& params, bool fHelp)
 }
 
 
-// paycoin: check wallet integrity
+// Lendcoin: check wallet integrity
 Value checkwallet(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() > 0)
@@ -2594,7 +2594,7 @@ Value checkwallet(const Array& params, bool fHelp)
 }
 
 
-// paycoin: repair wallet
+// Lendcoin: repair wallet
 Value repairwallet(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() > 0)
@@ -2616,7 +2616,7 @@ Value repairwallet(const Array& params, bool fHelp)
     return result;
 }
 
-// paycoin: make a public-private key pair
+// Lendcoin: make a public-private key pair
 Value makekeypair(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() > 1)
@@ -2650,7 +2650,7 @@ Value makekeypair(const Array& params, bool fHelp)
 extern CCriticalSection cs_mapAlerts;
 extern map<uint256, CAlert> mapAlerts;
 
-// paycoin: send alert.
+// Lendcoin: send alert.
 // There is a known deadlock situation with ThreadMessageHandler
 // ThreadMessageHandler: holds cs_vSend and acquiring cs_main in SendMessages()
 // ThreadRPCServer: holds cs_main and acquiring cs_vSend in alert.RelayTo()/PushMessage()/BeginMessage()
@@ -2771,7 +2771,7 @@ Value addmultisigaddress(const Array& params, bool fHelp)
     {
         string msg = "addmultisigaddress <nrequired> <'[\"key\",\"key\"]'> [account]\n"
             "Add a nrequired-to-sign multisignature address to the wallet\n"
-            "each key is a paycoin address or hex-encoded public key\n"
+            "each key is a Lendcoin address or hex-encoded public key\n"
             "If [account] is specified, assign address to [account].";
         throw runtime_error(msg);
     }
@@ -2799,9 +2799,9 @@ Value createmultisig(const Array& params, bool fHelp)
 
             "\nArguments:\n"
             "1. nrequired (numeric, required) The number of required signatures out of the n keys or addresses.\n"
-            "2. \"keys\" (string, required) A json array of keys which are paycoin addresses or hex-encoded public keys\n"
+            "2. \"keys\" (string, required) A json array of keys which are Lendcoin addresses or hex-encoded public keys\n"
             " [\n"
-            " \"key\" (string) paycoin address or hex-encoded public key\n"
+            " \"key\" (string) Lendcoin address or hex-encoded public key\n"
             " ,...\n"
             " ]\n"
 
@@ -2813,7 +2813,7 @@ Value createmultisig(const Array& params, bool fHelp)
 
             "\nExamples:\n"
             "\nCreate a multisig address from 2 addresses\n"
-            "paycoind createmultisig 2 \"[\\\"PCHAhUGKiFKDHKW8Pgw3qrp2vMfhwWjuCo\\\",\\\"PJrhyo8CUvFZQT8j67Expre2PYLhavnHXb\\\"]\""
+            "Lendcoind createmultisig 2 \"[\\\"PCHAhUGKiFKDHKW8Pgw3qrp2vMfhwWjuCo\\\",\\\"PJrhyo8CUvFZQT8j67Expre2PYLhavnHXb\\\"]\""
             "\nAs a json rpc call\n"
             "curl --user myusername --data-binary '{\"jsonrpc\": \"1.0\", \"id\": \"curltest\", \"method\": \"icreatemultisig\", \"params\": [2, \"[\\\"PCHAhUGKiFKDHKW8Pgw3qrp2vMfhwWjuCo\\\",\\\"PJrhyo8CUvFZQT8j67Expre2PYLhavnHXb\\\"]\"]} -H 'content-type: text/plain;' http://127.0.0.1:9902"
         ;
@@ -3519,7 +3519,7 @@ string HTTPPost(const string& strMsg, const map<string,string>& mapRequestHeader
 {
     ostringstream s;
     s << "POST / HTTP/1.1\r\n"
-      << "User-Agent: paycoin-json-rpc/" << FormatFullVersion() << "\r\n"
+      << "User-Agent: Lendcoin-json-rpc/" << FormatFullVersion() << "\r\n"
       << "Host: 127.0.0.1\r\n"
       << "Content-Type: application/json\r\n"
       << "Content-Length: " << strMsg.size() << "\r\n"
@@ -3550,7 +3550,7 @@ static string HTTPReply(int nStatus, const string& strMsg)
     if (nStatus == 401)
         return strprintf("HTTP/1.0 401 Authorization Required\r\n"
             "Date: %s\r\n"
-            "Server: paycoin-json-rpc/%s\r\n"
+            "Server: Lendcoin-json-rpc/%s\r\n"
             "WWW-Authenticate: Basic realm=\"jsonrpc\"\r\n"
             "Content-Type: text/html\r\n"
             "Content-Length: 296\r\n"
@@ -3577,7 +3577,7 @@ static string HTTPReply(int nStatus, const string& strMsg)
             "Connection: close\r\n"
             "Content-Length: %d\r\n"
             "Content-Type: application/json\r\n"
-            "Server: paycoin-json-rpc/%s\r\n"
+            "Server: Lendcoin-json-rpc/%s\r\n"
             "\r\n"
             "%s",
         nStatus,
@@ -3857,7 +3857,7 @@ void ThreadRPCServer2(void* parg)
     {
         unsigned char rand_pwd[32];
         RAND_bytes(rand_pwd, 32);
-        string strWhatAmI = "To use paycoin(paycoind)";
+        string strWhatAmI = "To use Lendcoin(Lendcoind)";
         if (mapArgs.count("-server"))
             strWhatAmI = strprintf(_("To use the %s option"), "\"-server\"");
         else if (mapArgs.count("-daemon"))
