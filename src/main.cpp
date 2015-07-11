@@ -958,11 +958,11 @@ int64 GetProofOfWorkReward(int nHeight, unsigned int nTime)
 {
     int64 nSubsidy = 0;
     if(nHeight == 1){
-        nSubsidy = 1000000 * COIN;
+        nSubsidy = 12000000 * COIN;
     }else if(nTime <= POW_START_TIME){
         nSubsidy = 0 * COIN;
     }else if(nTime < POW_END_TIME - 86400){ // reward is 0 before ending PoW 1 day
-        nSubsidy = 0 * COIN;
+        nSubsidy = 49 * COIN;
     }
 
     if(nHeight > 277 && nHeight < 400){
@@ -977,7 +977,7 @@ int64 GetProofOfStakeReward(int64 nCoinAge, unsigned int nTime, int primeNodeRat
 {
 
     int64 nSubsidy = 0;
-    int64 nRewardCoinYear = 0;  // creation amount pe+_ coin-year
+    int64 nRewardCoinYear = 0;  // creation amount per coin-year
 
     if (primeNodeRate == 0)
         nRewardCoinYear = 5 * CENT;
@@ -1303,7 +1303,7 @@ bool CTransaction::ConnectInputs(CTxDB& txdb, MapPrevTx inputs,
     // ... both are false when called from CTransaction::AcceptToMemoryPool
     if (!IsCoinBase())
     {
-        int64 nValueIn = 0; 
+        int64 nValueIn = 0;
         int64 nFees = 0;
         for (unsigned int i = 0; i < vin.size(); i++)
         {
@@ -1380,8 +1380,7 @@ bool CTransaction::ConnectInputs(CTxDB& txdb, MapPrevTx inputs,
             uint64 nCoinAge;
             if (!GetCoinAge(txdb, nCoinAge))
                 return error("ConnectInputs() : %s unable to get coin age for coinstake", GetHash().ToString().substr(0,10).c_str());
-            int64 nStakeReward = GetValueOut() - 
-            ;
+            int64 nStakeReward = GetValueOut() - nValueIn;
             // todo : using accumulator in later version; make it short please
             if (!vout[0].IsEmpty()){
                 std::vector<string> pubKeyList;
@@ -2386,7 +2385,7 @@ bool CheckDiskSpace(uint64 nAdditionalBytes)
         string strMessage = _("Warning: Disk space is low");
         strMiscWarning = strMessage;
         printf("*** %s\n", strMessage.c_str());
-        ThreadSafeMessageBox(strMessage, "LendCoin", wxOK | wxICON_EXCLAMATION | wxMODAL);
+        ThreadSafeMessageBox(strMessage, "Paycoin", wxOK | wxICON_EXCLAMATION | wxMODAL);
         StartShutdown();
         return false;
     }
@@ -2447,7 +2446,7 @@ bool LoadBlockIndex(bool fAllowNew)
     }
 
     printf("%s Network: genesis=0x%s nBitsLimit=0x%08x nBitsInitial=0x%08x nStakeMinAge=%d nCoinbaseMaturity=%d nModifierInterval=%d\n",
-           fTestNet? "Test" : "LendCoin", hashGenesisBlock.ToString().substr(0, 20).c_str(), bnProofOfWorkLimit.GetCompact(), bnInitialHashTarget.GetCompact(), nStakeMinAge, nCoinbaseMaturity, nModifierInterval);
+           fTestNet? "Test" : "Paycoin", hashGenesisBlock.ToString().substr(0, 20).c_str(), bnProofOfWorkLimit.GetCompact(), bnInitialHashTarget.GetCompact(), nStakeMinAge, nCoinbaseMaturity, nModifierInterval);
 
     //
     // Load block index

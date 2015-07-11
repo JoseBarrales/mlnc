@@ -1,5 +1,5 @@
 ---
-name: "lendcoin-deps"
+name: "paycoin-deps"
 suites:
 - "precise"
 architectures:
@@ -78,7 +78,7 @@ script: |
    
   -miniupnpcstrings.h: miniupnpcstrings.h.in wingenminiupnpcstrings
   -	wingenminiupnpcstrings \$< \$@
-  +miniupnpcstrings.h: miniupnpcstrings.h.in 
+  +miniupnpcstrings.h: miniupnpcstrings.h.in
   +	sed -e 's|OS/version|MSWindows/5.1.2600|' -e 's|MINIUPNPC_VERSION_STRING \"version\"|MINIUPNPC_VERSION_STRING \"VERSIONHERE\"|' \$< > \$@
    
    minixml.o:	minixml.c minixml.h miniupnpcstrings.h
@@ -124,5 +124,5 @@ script: |
     done
     #
     cd $INSTALLPREFIX
-    find include lib | sort | zip -X@ $OUTDIR/lendcoin-deps-win$BITS-gitian-r12.zip
+    find include lib | sort | zip -X@ $OUTDIR/paycoin-deps-win$BITS-gitian-r12.zip
   done # for BITS in
