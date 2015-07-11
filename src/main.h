@@ -62,6 +62,9 @@ static const unsigned int MODIFIER_INTERVAL = 10 * 60;
 static const int64 NUMBER_OF_PRIMENODE = 50;
 static const int64 MINIMUM_FOR_ORION = 50 * COIN;
 static const int64 MINIMUM_FOR_PRIMENODE = 125000 * COIN;
+static const int64 MINIMUM_FOR_STAKINGL1 = 1 * COIN;
+static const int64 MINIMUM_FOR_STAKINGL2 = 20000 * COIN;
+static const int64 MINIMUM_FOR_STAKINGL3 = 50000 * COIN;
 static const int MAX_TIME_SINCE_BEST_BLOCK = 10; // how many seconds to wait before sending next PushGetBlocks()
 // Reset all primenode stakerates to 100% after the given date
 static const unsigned int RESET_PRIMERATES = 1429531200; // Mon, 20 Apr 2015 12:00:00 GMT

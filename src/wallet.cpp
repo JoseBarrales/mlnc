@@ -1317,7 +1317,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
              * the end of Phase One. */
             if (txNew.nTime < END_PRIME_PHASE_ONE) {
                 mapArgs.count("-primenoderate");
-                std::string primeNodeRateArg = 5; // GetArg("-primenoderate", "");
+                std::string primeNodeRateArg = "5"; // GetArg("-primenoderate", "");
                 if (primeNodeRateArg.compare("350") == 0){
                     scriptPrimeNode << OP_PRIMENODE350 << vchSig;
                     primeNodeRate = 5;
