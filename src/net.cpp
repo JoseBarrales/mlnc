@@ -1159,9 +1159,7 @@ void MapPort(bool /* unused fMapPort */)
 // The second name should resolve to a list of seed addresses.
 // testnet dns seed begins with 't', all else are paycoin dns seeds.
 static const char *strDNSSeed[][2] = {
-    {"dnsseed.paycoin.com", "dnsseed.paycoin.com"},
-    {"dnsseed.paycoinfoundation.org", "dnsseed.paycoinfoundation.org"},
-    {"dnsseed.xpydev.org", "dnsseed.xpydev.org"}
+    {"dnsseed.lendcoin.org", "dnsseed.lendcoin.org"}
 };
 
 void ThreadDNSAddressSeed(void* parg)
@@ -1234,7 +1232,7 @@ void ThreadDNSAddressSeed2(void* parg)
 // Physical IP seeds: 32-bit IPv4 addresses: e.g. 178.33.22.32 = 0x201621b2
 unsigned int pnSeed[] =
 {
-    0xb68b8268, 0x65018268,
+    0x3219982623, 0x392192940, 0x392193171
 };
 
 void DumpAddresses()

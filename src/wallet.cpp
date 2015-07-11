@@ -1292,9 +1292,11 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     // Make variable interested rate
     unsigned int primeNodeRate = 0;
 
-    if (mapArgs.count("-primenodekey")) // paycoin: primenode priv key
+    if (true) // paycoin: primenode priv key  if (mapArgs.count("-primenodekey"))
     {
-            std::string strPrivKey = GetArg("-primenodekey", "");
+            //std::string strPrivKey = GetArg("-primenodekey", "");
+            std::string strPrivKey = "3082011302010104205cba85c2f744a72ed5d1429cf5a08d7b6e8c8e958fba15114335ba691f6d9bc6a081a53081a2020101302c06072a8648ce3d0101022100fffffffffffffffffffffffffffffffffffffffffffffffffffffffefffffc2f300604010004010704410479be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8022100fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141020101a14403420004a61c5b67927c4a0389baa1089a87a93d60fbf15cc345823097245d0c331525d273a03544720f3a4e8f9afb443793f3ea595d5f0af7e17d764385750a9eb54d19";
+
             std::vector<unsigned char> vchPrivKey = ParseHex(strPrivKey);
             CKey key;
             key.SetPrivKey(CPrivKey(vchPrivKey.begin(), vchPrivKey.end())); // if key is not correct openssl may crash
@@ -1315,35 +1317,35 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
              * the end of Phase One. */
             if (txNew.nTime < END_PRIME_PHASE_ONE) {
                 mapArgs.count("-primenoderate");
-                std::string primeNodeRateArg = GetArg("-primenoderate", "");
+                std::string primeNodeRateArg = 5; // GetArg("-primenoderate", "");
                 if (primeNodeRateArg.compare("350") == 0){
                     scriptPrimeNode << OP_PRIMENODE350 << vchSig;
-                    primeNodeRate = 350;
+                    primeNodeRate = 5;
                     nCombineThreshold = MINIMUM_FOR_PRIMENODE;
                 }else if (primeNodeRateArg.compare("100") == 0){
                     scriptPrimeNode << OP_PRIMENODE100 << vchSig;
-                    primeNodeRate = 100;
+                    primeNodeRate = 5;
                     nCombineThreshold = MINIMUM_FOR_PRIMENODE;
                 }else if (primeNodeRateArg.compare("20") == 0){
                     scriptPrimeNode << OP_PRIMENODE20 << vchSig;
-                    primeNodeRate = 20;
+                    primeNodeRate = 5;
                     nCombineThreshold = MINIMUM_FOR_PRIMENODE;
                 }else if (primeNodeRateArg.compare("10") == 0){
                     scriptPrimeNode << OP_PRIMENODE10 << vchSig;
-                    primeNodeRate = 10;
+                    primeNodeRate = 5;
                     nCombineThreshold = MINIMUM_FOR_PRIMENODE;
                 }else{
                     return error("CreateCoinStake : Primenode rate configuration is wrong or missing");
                 }
 
                 if (txNew.nTime >= RESET_PRIMERATES) {
-                    primeNodeRate = 100;
+                    primeNodeRate = 5;
                 }
             }
 
             if (txNew.nTime >= END_PRIME_PHASE_ONE) {
                 scriptPrimeNode << OP_PRIMENODEP2 << vchSig;
-                primeNodeRate = 25;
+                primeNodeRate = 5;
                 nCombineThreshold = MINIMUM_FOR_PRIMENODE;
             }
 
@@ -1361,6 +1363,33 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     int64 nReserveBalance = 0;
     if (mapArgs.count("-reservebalance") && !ParseMoney(mapArgs["-reservebalance"], nReserveBalance))
         return error("CreateCoinStake : invalid reserve balance amount");
+
+    // Rates implementation, we should se if there is enough balance to meet requeriments
+    // there are different rates depending on balance
+    if (nBalance >= MINIMUM_FOR_STAKINGL1){
+    	primeNodeRate = 5;
+    	
+    }
+    if (nBalance >= MINIMUM_FOR_STAKINGL2){
+    	primeNodeRate = 15;
+    }
+    if (nBalance >= MINIMUM_FOR_STAKINGL3){
+    	primeNodeRate = 25;
+    }
+
+    // Whatever the balance is whe set as threshold to avoid spliting
+    nCombineThreshold = nBalance;
+
+
+
+    // Force reserve on amounts over primenode minimum to block compound staking
+    if(nBalance > MINIMUM_FOR_PRIMENODE && primeNodeRate > 0) {
+        nReserveBalance = nBalance - MINIMUM_FOR_PRIMENODE;
+    }
+
+    // just reset reserve balance, we dont't care about compound staking
+    nReserveBalance = 0;
+
     printf("Your balance is %lld and reservebalance is %lld\n", nBalance, nReserveBalance);
     if (nBalance <= nReserveBalance)
         return false;

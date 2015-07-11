@@ -16,9 +16,9 @@
 // a large 4-byte int at any alignment.
 
 // Public message start
-static unsigned char pchMessageStartMain[4] = { 0xaa, 0xaa, 0xaa, 0xaa };
+static unsigned char pchMessageStartMain[4] = { 0xaa, 0xab, 0xac, 0xad };
 // Public testnet message start
-static unsigned char pchMessageStartTest[4] = { 0xbb, 0xbb, 0xbb, 0xbb };
+static unsigned char pchMessageStartTest[4] = { 0xba, 0xbb, 0xbc, 0xbd };
 
 void GetMessageStart(unsigned char pchMessageStart[], bool fPersistent)
 {
