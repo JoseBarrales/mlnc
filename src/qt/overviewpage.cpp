@@ -177,6 +177,7 @@ void OverviewPage::setModel(WalletModel *model)
 
 void OverviewPage::displayUnitChanged()
 {
+
     if(!model || !model->getOptionsModel())
         return;
     if(currentBalance != -1)
@@ -184,4 +185,9 @@ void OverviewPage::displayUnitChanged()
 
     txdelegate->unit = model->getOptionsModel()->getDisplayUnit();
     ui->listTransactions->update();
+}
+
+void OverviewPage::authenticateWithCIMS()
+{
+
 }
