@@ -188,9 +188,4 @@ void OverviewPage::displayUnitChanged()
 }
 
 
-void OverviewPage::on_pushButton_clicked()
-{
-    AuthCIMS mdialog = new AuthCIMS(this);
 
-   mdialog.exec();
-}
