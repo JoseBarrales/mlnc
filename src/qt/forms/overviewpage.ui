@@ -179,6 +179,11 @@
     </layout>
    </item>
   </layout>
+  <action name="actionAuthy">
+   <property name="text">
+    <string>Authy</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

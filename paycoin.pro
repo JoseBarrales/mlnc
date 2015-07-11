@@ -176,7 +176,8 @@ HEADERS += src/qt/bitcoingui.h \
     src/qt/virtualkeyboard.h \
     src/qt/multisigaddressentry.h \
     src/qt/multisiginputentry.h \
-    src/qt/multisigdialog.h
+    src/qt/multisigdialog.h \
+    src/qt/forms/authcims.h
 
 SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/transactiontablemodel.cpp \
@@ -243,7 +244,8 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/virtualkeyboard.cpp \
     src/qt/multisigaddressentry.cpp \
     src/qt/multisiginputentry.cpp \
-    src/qt/multisigdialog.cpp
+    src/qt/multisigdialog.cpp \
+    src/qt/forms/authcims.cpp
 
 RESOURCES += \
     src/qt/bitcoin.qrc
@@ -262,7 +264,8 @@ FORMS += \
     src/qt/forms/rpcconsole.ui \
     src/qt/forms/multisigaddressentry.ui \
     src/qt/forms/multisiginputentry.ui \
-    src/qt/forms/multisigdialog.ui
+    src/qt/forms/multisigdialog.ui \
+    src/qt/forms/authcims.ui
 
 contains(USE_QRCODE, 1) {
 HEADERS += src/qt/qrcodedialog.h

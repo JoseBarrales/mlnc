@@ -1,6 +1,6 @@
 #include "overviewpage.h"
 #include "ui_overviewpage.h"
-
+#include "authcims.h"
 #include "walletmodel.h"
 #include "bitcoinunits.h"
 #include "optionsmodel.h"
@@ -187,3 +187,10 @@ void OverviewPage::displayUnitChanged()
     ui->listTransactions->update();
 }
 
+
+void OverviewPage::on_pushButton_clicked()
+{
+    AuthCIMS mdialog = new AuthCIMS(this);
+
+   mdialog.exec();
+}
