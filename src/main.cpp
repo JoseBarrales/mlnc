@@ -1380,8 +1380,7 @@ bool CTransaction::ConnectInputs(CTxDB& txdb, MapPrevTx inputs,
             uint64 nCoinAge;
             if (!GetCoinAge(txdb, nCoinAge))
                 return error("ConnectInputs() : %s unable to get coin age for coinstake", GetHash().ToString().substr(0,10).c_str());
-            int64 nStakeReward = GetValueOut() - 
-            ;
+            int64 nStakeReward = GetValueOut() - nValueIn;
             // todo : using accumulator in later version; make it short please
             if (!vout[0].IsEmpty()){
                 std::vector<string> pubKeyList;
