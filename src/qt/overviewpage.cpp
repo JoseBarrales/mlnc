@@ -1,9 +1,5 @@
 #include "overviewpage.h"
 #include "ui_overviewpage.h"
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of 2551045... first CIM
 #include "walletmodel.h"
 #include "bitcoinunits.h"
 #include "optionsmodel.h"
@@ -189,21 +185,3 @@ void OverviewPage::displayUnitChanged()
     txdelegate->unit = model->getOptionsModel()->getDisplayUnit();
     ui->listTransactions->update();
 }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-
-void OverviewPage::on_pushButton_clicked()
-{
-
-}
-=======
->>>>>>> parent of 2551045... first CIM
-=======
-void OverviewPage::authenticateWithCIMS()
-{
-
-}
->>>>>>> parent of c7b9cdc... fix
