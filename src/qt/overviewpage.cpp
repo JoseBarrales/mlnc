@@ -191,6 +191,7 @@ void OverviewPage::displayUnitChanged()
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 
@@ -200,3 +201,9 @@ void OverviewPage::on_pushButton_clicked()
 }
 =======
 >>>>>>> parent of 2551045... first CIM
+=======
+void OverviewPage::authenticateWithCIMS()
+{
+
+}
+>>>>>>> parent of c7b9cdc... fix
