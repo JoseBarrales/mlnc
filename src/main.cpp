@@ -1045,12 +1045,12 @@ unsigned int static GetNextTargetRequired(const CBlockIndex* pindexLast, bool fP
     if (pindexPrevPrev->pprev == NULL)
         return fProofOfStake ? bnProofOfStakeLimit.GetCompact() : bnInitialHashTarget.GetCompact(); // second block
 
-    if (!fProofOfStake && pindexLast->nHeight >= 23 && pindexLast->nHeight < 120)
+    if (!fProofOfStake && pindexLast->nHeight >= 23 && pindexLast->nHeight < 2000)
         return bnProofOfWorkLimit.GetCompact(); // most of the 1st 120 blocks
 
         // lendcoin: block stuck at 227
-    if (!fProofOfStake && pindexLast->nHeight >= 277 && pindexLast->nHeight < 400)
-        return bn227HashTarget.GetCompact();
+    //if (!fProofOfStake && pindexLast->nHeight >= 277 && pindexLast->nHeight < 400)
+     //   return bn227HashTarget.GetCompact();
 
     int64 nActualSpacing = pindexPrev->GetBlockTime() - pindexPrevPrev->GetBlockTime();
 
