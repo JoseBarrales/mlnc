@@ -959,7 +959,7 @@ int64 GetProofOfWorkReward(int nHeight, unsigned int nTime)
     int64 nSubsidy = 0;
     if(nHeight == 1){
         nSubsidy = 1000000 * COIN;
-    }else if(nTime <= POW_START_TIME){
+    }else if(nHeight < 10000){
         nSubsidy = 1 * COIN;
     }
 
