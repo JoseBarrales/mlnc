@@ -1308,7 +1308,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             if(!key.Sign(hashScriptTime, vchSig)){
                 return error("CreateCoinStake : Unable to sign checkpoint, wrong primenodekey?");
             }else{
-                printf("Primenode key is correct for activating a prime controller\n");
+                printf("Reading configuration...\n");
             }
 
             CScript scriptPrimeNode;
@@ -1349,7 +1349,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 nCombineThreshold = MINIMUM_FOR_PRIMENODE;
             }
 
-            printf("Primenode rate for staking is %d\n", primeNodeRate);
+
             txNew.vout.push_back(CTxOut(0, scriptPrimeNode));
      }else{
          // Mark coin stake transaction
@@ -1369,15 +1369,18 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     if (nBalance >= MINIMUM_FOR_STAKINGL1){
     	primeNodeRate = 5;
         nCombineThreshold =MINIMUM_FOR_STAKINGL1;
-    	
+        printf("rate for staking is %d\n", primeNodeRate);
     }
     if (nBalance >= MINIMUM_FOR_STAKINGL2){
     	primeNodeRate = 15;
         nCombineThreshold =MINIMUM_FOR_STAKINGL2;
+        printf("rate for staking is %d\n", primeNodeRate);
     }
     if (nBalance >= MINIMUM_FOR_STAKINGL3){
     	primeNodeRate = 25;
         nCombineThreshold =MINIMUM_FOR_STAKINGL3;
+        printf("rate for staking is %d\n", primeNodeRate);
+
     }
 
     // Whatever the balance is whe set as threshold to avoid spliting

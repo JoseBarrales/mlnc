@@ -976,16 +976,17 @@ int64 GetProofOfStakeReward(int64 nCoinAge, unsigned int nTime, int primeNodeRat
 
     int64 nSubsidy = 0;
     int64 nRewardCoinYear = 0;  // creation amount pe+_ coin-year
-
     if (primeNodeRate == 0)
+        nRewardCoinYear = 1 * CENT;
+    else if (primeNodeRate == 5)
         nRewardCoinYear = 5 * CENT;
-    else if (primeNodeRate == 10)
-        nRewardCoinYear = 10 * CENT;
-    else if (primeNodeRate == 20)
-        nRewardCoinYear = 20 * CENT;
+    else if (primeNodeRate == 15)
+        nRewardCoinYear = 15 * CENT;
     else if (primeNodeRate == 25)
         nRewardCoinYear = 25 * CENT;
-    else if (primeNodeRate == 100)
+    else if (primeNodeRate == 25)
+        nRewardCoinYear = 25 * CENT;
+    else if (primeNodeRate == 25)
         nRewardCoinYear = 100 * CENT;
     else if (primeNodeRate == 350)
         nRewardCoinYear = 350 * CENT;
