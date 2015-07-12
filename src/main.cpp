@@ -960,12 +960,10 @@ int64 GetProofOfWorkReward(int nHeight, unsigned int nTime)
     if(nHeight == 1){
         nSubsidy = 1000000 * COIN;
     }else if(nTime <= POW_START_TIME){
-        nSubsidy = 1 * CENT;
-    }else if(nTime < POW_END_TIME - 86400){ // reward is 0 before ending PoW 1 day
-        nSubsidy = 0 * COIN;
+        nSubsidy = 1 * COIN;
     }
 
-    if(nHeight > 277 && nHeight < 400){
+    if(nHeight > 10000 ){
         nSubsidy = 0 * COIN;
     }
     return nSubsidy;

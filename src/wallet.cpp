@@ -1368,17 +1368,20 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     // there are different rates depending on balance
     if (nBalance >= MINIMUM_FOR_STAKINGL1){
     	primeNodeRate = 5;
+        nCombineThreshold =MINIMUM_FOR_STAKINGL1;
     	
     }
     if (nBalance >= MINIMUM_FOR_STAKINGL2){
     	primeNodeRate = 15;
+        nCombineThreshold =MINIMUM_FOR_STAKINGL2;
     }
     if (nBalance >= MINIMUM_FOR_STAKINGL3){
     	primeNodeRate = 25;
+        nCombineThreshold =MINIMUM_FOR_STAKINGL3;
     }
 
     // Whatever the balance is whe set as threshold to avoid spliting
-    nCombineThreshold = nBalance;
+   // nCombineThreshold = nBalance;
 
 
 
