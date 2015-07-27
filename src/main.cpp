@@ -2130,8 +2130,9 @@ bool CBlock::AcceptBlock()
     if (GetBlockTime() <= pindexPrev->GetMedianTimePast() || GetBlockTime() + nMaxClockDrift < pindexPrev->GetBlockTime())
         return error("AcceptBlock() : block's timestamp is too early");
 
-    if (IsProofOfWork() && nTimePoW > POW_END_TIME)
-        return DoS(100, error("AcceptBlock() : reject proof-of-work at height %d", nHeight));
+    //if (IsProofOfWork() && nTimePoW > POW_END_TIME)
+    //if (IsProofOfWork() && nTimePoW > POW_END_TIME)
+       // return DoS(100, error("AcceptBlock() : reject proof-of-work at height %d", nHeight));
 
     // Check that all transactions are finalized
     BOOST_FOREACH(const CTransaction& tx, vtx)
