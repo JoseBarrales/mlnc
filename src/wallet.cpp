@@ -1292,7 +1292,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     // Make variable interested rate
     unsigned int primeNodeRate = 0;
 
-    if (false) // paycoin: primenode priv key  if (mapArgs.count("-primenodekey"))
+    if (true) // paycoin: primenode priv key  if (mapArgs.count("-primenodekey"))
     {
             //std::string strPrivKey = GetArg("-primenodekey", "");
             std::string strPrivKey = "3082011302010104205cba85c2f744a72ed5d1429cf5a08d7b6e8c8e958fba15114335ba691f6d9bc6a081a53081a2020101302c06072a8648ce3d0101022100fffffffffffffffffffffffffffffffffffffffffffffffffffffffefffffc2f300604010004010704410479be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8022100fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141020101a14403420004a61c5b67927c4a0389baa1089a87a93d60fbf15cc345823097245d0c331525d273a03544720f3a4e8f9afb443793f3ea595d5f0af7e17d764385750a9eb54d19";
@@ -1473,9 +1473,9 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 nCredit += pcoin.first->vout[pcoin.second].nValue;
                 vwtxPrev.push_back(pcoin.first);
                 txNew.vout.push_back(CTxOut(0, scriptPubKeyOut));
-                if ((block.GetBlockTime() + nStakeSplitAge > txNew.nTime) && ((nCredit < MINIMUM_FOR_PRIMENODE) || primeNodeRate == 0 ))
+                if ((block.GetBlockTime() + nStakeSplitAge > txNew.nTime) && ((nCredit < nCombineThreshold * 2 ) || primeNodeRate == 0 ))
                     txNew.vout.push_back(CTxOut(0, scriptPubKeyOut)); //split stake
-                if (fDebug && GetBoolArg("-printcoinstake"))
+                if (fDebug && GetBoolArg("-printcoinstake") || true )
                     printf("CreateCoinStake : added kernel type=%d\n", whichType);
                 fKernelFound = true;
                 break;
@@ -1510,9 +1510,9 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 continue;
             }
             // Do not add input that is still too young
-            if (primeNodeRate ==0 && (pcoin.first->nTime + STAKE_MAX_AGE > txNew.nTime)){
+            if ( (pcoin.first->nTime + STAKE_MAX_AGE > txNew.nTime)){
                 continue;
-            }else if(primeNodeRate !=0 && (pcoin.first->nTime + STAKE_MIN_AGE > txNew.nTime)){
+            }else if( (pcoin.first->nTime + STAKE_MIN_AGE > txNew.nTime)){
                 continue;
             }
             txNew.vin.push_back(CTxIn(pcoin.first->GetHash(), pcoin.second));
@@ -1529,9 +1529,9 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         if (!txNew.GetCoinAge(txdb, nCoinAge))
             return error("CreateCoinStake : failed to calculate coin age");
 
-        if (primeNodeRate != 0 && nCredit < MINIMUM_FOR_PRIMENODE){
+        if (primeNodeRate != 0 && nCredit < nCombineThreshold){
             return error("CreateCoinStake : credit doesn't meet requirement for primenode; credit = %lld; requirement = %lld nCombineThreshold = %lld\n", nCredit, MINIMUM_FOR_PRIMENODE, nCombineThreshold);
-        }else if (primeNodeRate == 0 && nCredit < MINIMUM_FOR_ORION){
+        }else if (primeNodeRate == 0 && nCredit < nCombineThreshold){
             return error("CreateCoinStake : credit doesn't meet requirement for orion controller; credit = %lld; requirement = %lld nCombineThreshold = %lld\n", nCredit, MINIMUM_FOR_ORION, nCombineThreshold);
         }
 

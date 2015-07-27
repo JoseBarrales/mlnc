@@ -43,13 +43,13 @@ inline bool MoneyRange(int64 nValue) { return (nValue >= 0 && nValue <= MAX_MONE
 static const int COINBASE_MATURITY_PPC = 100;
 // Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp.
 static const int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
-static const int STAKE_TARGET_SPACING = 1 * 30; // 1-minute block to 30 seconds block
+static const int STAKE_TARGET_SPACING = 1 * 60; // 1-minute block to 30 seconds block
 //static const int STAKE_TARGET_SPACING = 1; // 1 second block spacing
-static const int STAKE_MIN_AGE = 60 ;//* 60; // minimum age for coin age
+static const int STAKE_MIN_AGE = 60 * 60; // minimum age for coin age
 //static const int STAKE_MIN_AGE = 60; // minimum age for coin age
-static const int STAKE_MAX_AGE = 60 * 2;//60 * 24 * 5; // stake age of full weight
+static const int STAKE_MAX_AGE = 60  * 24 * 5; // stake age of full weight
 //static const int STAKE_MAX_AGE = 60 * 2; // stake age of full weight
-static const int STAKE_START_TIME = 1418470264; // Sat 13 Dec 2014 06:31:04 AM EST
+static const int STAKE_START_TIME = 1436523723; // Sat 13 Dec 2014 06:31:04 AM EST
 //static const int STAKE_START_TIME = 1418345400; // Thu 11 Dec 2014 05:30:00 PM EST
 static const unsigned int POW_START_TIME = 1436523723; // Fri 12 Dec 2014 12:00:00 PM EST
 //static const unsigned int POW_START_TIME = 1418345100; // Thu 11 Dec 2014 05:00:00 PM EST
@@ -67,8 +67,8 @@ static const int64 MINIMUM_FOR_STAKINGL2 = 20000 * COIN;
 static const int64 MINIMUM_FOR_STAKINGL3 = 50000 * COIN;
 static const int MAX_TIME_SINCE_BEST_BLOCK = 10; // how many seconds to wait before sending next PushGetBlocks()
 // Reset all primenode stakerates to 100% after the given date
-static const unsigned int RESET_PRIMERATES = 1429531200; // Mon, 20 Apr 2015 12:00:00 GMT
-static const unsigned int END_PRIME_PHASE_ONE = 1435752000; // Wed, 01 Jul 2015 12:00:00 GMT
+static const unsigned int RESET_PRIMERATES = 2700325231; // Mon, 20 Apr 2015 12:00:00 GMT
+static const unsigned int END_PRIME_PHASE_ONE = 2700325231; // Wed, 01 Jul 2015 12:00:00 GMT
 
 #ifdef USE_UPNP
 static const int fHaveUPnP = true;

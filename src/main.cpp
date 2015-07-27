@@ -959,11 +959,11 @@ int64 GetProofOfWorkReward(int nHeight, unsigned int nTime)
     int64 nSubsidy = 0;
     if(nHeight == 1){
         nSubsidy = 1000000 * COIN;
-    }else if(nHeight < 10000){
+    }else if(nHeight < 1000){
         nSubsidy = 1 * COIN;
     }
 
-    if(nHeight > 10000 ){
+    if(nHeight > 1000 ){
         nSubsidy = 0 * COIN;
     }
     return nSubsidy;
@@ -986,10 +986,7 @@ int64 GetProofOfStakeReward(int64 nCoinAge, unsigned int nTime, int primeNodeRat
         nRewardCoinYear = 25 * CENT;
     else if (primeNodeRate == 25)
         nRewardCoinYear = 25 * CENT;
-    else if (primeNodeRate == 25)
-        nRewardCoinYear = 100 * CENT;
-    else if (primeNodeRate == 350)
-        nRewardCoinYear = 350 * CENT;
+
 
     nSubsidy = nCoinAge * nRewardCoinYear * 33 / (365 * 33 + 8);
 
@@ -1046,7 +1043,7 @@ unsigned int static GetNextTargetRequired(const CBlockIndex* pindexLast, bool fP
     if (pindexPrevPrev->pprev == NULL)
         return fProofOfStake ? bnProofOfStakeLimit.GetCompact() : bnInitialHashTarget.GetCompact(); // second block
 
-    if (!fProofOfStake && pindexLast->nHeight >= 23 && pindexLast->nHeight < 2000)
+    if (!fProofOfStake && pindexLast->nHeight >= 23 && pindexLast->nHeight < 1000)
         return bnProofOfWorkLimit.GetCompact(); // most of the 1st 120 blocks
 
         // lendcoin: block stuck at 227
