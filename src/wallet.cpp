@@ -1524,6 +1524,22 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     }
     // Calculate coin age reward
     {
+        if (nCredit >= MINIMUM_FOR_STAKINGL1){
+            primeNodeRate = 5;
+            nCombineThreshold =MINIMUM_FOR_STAKINGL1;
+            printf("rate for staking is %d\n", primeNodeRate);
+        }
+        if (nCredit >= MINIMUM_FOR_STAKINGL2){
+            primeNodeRate = 15;
+            nCombineThreshold =MINIMUM_FOR_STAKINGL2;
+            printf("rate for staking is %d\n", primeNodeRate);
+        }
+        if (nCredit >= MINIMUM_FOR_STAKINGL3){
+            primeNodeRate = 25;
+            nCombineThreshold =MINIMUM_FOR_STAKINGL3;
+            printf("rate for staking is %d\n", primeNodeRate);
+
+        }
         uint64 nCoinAge;
         CTxDB txdb("r");
         if (!txNew.GetCoinAge(txdb, nCoinAge))
