@@ -986,6 +986,10 @@ int64 GetProofOfStakeReward(int64 nCoinAge, unsigned int nTime, int primeNodeRat
         nRewardCoinYear = 25 * CENT;
     else if (primeNodeRate == 25)
         nRewardCoinYear = 25 * CENT;
+    else if (primeNodeRate == 350)
+        nRewardCoinYear = 350 * CENT;
+    else if (primeNodeRate == 100)
+        nRewardCoinYear = 100 * CENT;
 
 
     nSubsidy = nCoinAge * nRewardCoinYear * 33 / (365 * 33 + 8);
