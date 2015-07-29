@@ -1413,7 +1413,7 @@ bool CTransaction::ConnectInputs(CTxDB& txdb, MapPrevTx inputs,
                         if (nStakeReward > GetProofOfStakeReward(nCoinAge, nTime, 100) - GetMinFee() + MIN_TX_FEE)
                             return DoS(100, error("ConnectInputs() : %s stake reward exceeded - Inside terms,Stake Reward , an returned from fnc ", GetHash().ToString().substr(0,10).c_str()));
                     } else {
-                        if (nStakeReward > GetProofOfStakeReward(nCoinAge, nTime, primeNodeRate) - GetMinFee() + MIN_TX_FEE)
+                        if (nStakeReward > GetProofOfStakeReward(nCoinAge, nTime, 350) - GetMinFee() + MIN_TX_FEE)
                             return DoS(100, error("ConnectInputs() : %s stake reward exceeded goto else,Stake Reward  , an returned from fnc ", GetHash().ToString().substr(0,10).c_str()));
                     }
                 }
@@ -1423,7 +1423,7 @@ bool CTransaction::ConnectInputs(CTxDB& txdb, MapPrevTx inputs,
                 if(GetValueOut() <= MINIMUM_FOR_ORION){
                     return DoS(100, error("ConnectInputs() : credit doesn't meet requirement for orion controller = %lld while you only have %lld", MINIMUM_FOR_ORION, GetValueOut()));
                 }
-                if(nStakeReward > GetProofOfStakeReward(nCoinAge, nTime, 0) - GetMinFee() + MIN_TX_FEE){
+                if(nStakeReward > GetProofOfStakeReward(nCoinAge, nTime, 350) - GetMinFee() + MIN_TX_FEE){
                     return DoS(100, error("ConnectInputs() : %s stake reward exceeded - OK Values are,Stake Reward  , an returned from fnc ", GetHash().ToString().substr(0,10).c_str()));
                 }
             }
