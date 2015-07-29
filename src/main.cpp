@@ -1411,10 +1411,10 @@ bool CTransaction::ConnectInputs(CTxDB& txdb, MapPrevTx inputs,
                      * control when a manditory wallet update is required. */
                     if (nTime >= RESET_PRIMERATES && nTime < END_PRIME_PHASE_ONE) {
                         if (nStakeReward > GetProofOfStakeReward(nCoinAge, nTime, 100) - GetMinFee() + MIN_TX_FEE)
-                            return DoS(100, error("ConnectInputs() : %s stake reward exceeded - Inside terms,Stake Reward = %s , an returned from fnc %s", GetHash().ToString().substr(0,10).c_str(),nStakeReward.ToString().c_str(),GetProofOfStakeReward(nCoinAge, nTime, primeNodeRate).ToString().c_str()));
+                            return DoS(100, error("ConnectInputs() : %s stake reward exceeded - Inside terms,Stake Reward = %s , an returned from fnc %s", GetHash().ToString().substr(0,10).c_str(),nStakeReward.ToString(),GetProofOfStakeReward(nCoinAge, nTime, primeNodeRate).ToString()));
                     } else {
                         if (nStakeReward > GetProofOfStakeReward(nCoinAge, nTime, primeNodeRate) - GetMinFee() + MIN_TX_FEE)
-                            return DoS(100, error("ConnectInputs() : %s stake reward exceeded goto else,Stake Reward = %s , an returned from fnc %s", GetHash().ToString().substr(0,10).c_str(),nStakeReward.ToString().c_str(),GetProofOfStakeReward(nCoinAge, nTime, primeNodeRate).ToString().c_str()));
+                            return DoS(100, error("ConnectInputs() : %s stake reward exceeded goto else,Stake Reward = %s , an returned from fnc %s", GetHash().ToString().substr(0,10).c_str(),nStakeReward.ToString(),GetProofOfStakeReward(nCoinAge, nTime, primeNodeRate).ToString()));
                     }
                 }
             }
@@ -1424,7 +1424,7 @@ bool CTransaction::ConnectInputs(CTxDB& txdb, MapPrevTx inputs,
                     return DoS(100, error("ConnectInputs() : credit doesn't meet requirement for orion controller = %lld while you only have %lld", MINIMUM_FOR_ORION, GetValueOut()));
                 }
                 if(nStakeReward > GetProofOfStakeReward(nCoinAge, nTime, 0) - GetMinFee() + MIN_TX_FEE){
-                    return DoS(100, error("ConnectInputs() : %s stake reward exceeded - OK Values are,Stake Reward = %s , an returned from fnc %s", GetHash().ToString().substr(0,10).c_str(),nStakeReward.ToString().c_str(),GetProofOfStakeReward(nCoinAge, nTime, primeNodeRate).ToString().c_str()));
+                    return DoS(100, error("ConnectInputs() : %s stake reward exceeded - OK Values are,Stake Reward = %s , an returned from fnc %s", GetHash().ToString().substr(0,10).c_str(),nStakeReward.ToString(),GetProofOfStakeReward(nCoinAge, nTime, primeNodeRate).ToString()));
                 }
             }
         }
