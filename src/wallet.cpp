@@ -863,7 +863,11 @@ void CWallet::ResendWalletTransactions()
 //
 // Actions
 //
+int64 GetStakingRate()
+{
 
+    return 25;
+}
 
 int64 CWallet::GetBalance() const
 {

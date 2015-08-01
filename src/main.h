@@ -154,7 +154,8 @@ void BitcoinMiner(CWallet *pwallet, bool fProofOfStake);
 bool GetTransaction(const uint256 &hash, CTransaction &tx, uint256 &hashBlock);
 double GetBlockDifficulty(const CBlockIndex* blockindex = NULL);
 
-
+//
+int64 GetStakingRate();
 
 
 

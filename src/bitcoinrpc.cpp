@@ -599,6 +599,7 @@ Value getnetworkghps(const Array& params, bool fHelp)
 
 Value getinfo(const Array& params, bool fHelp)
 {
+
     if (fHelp || params.size() != 0)
         throw runtime_error(
             "getinfo\n"
@@ -611,6 +612,7 @@ Value getinfo(const Array& params, bool fHelp)
     obj.push_back(Pair("balance",       ValueFromAmount(pwalletMain->GetBalance())));
     obj.push_back(Pair("newmint",       ValueFromAmount(pwalletMain->GetNewMint())));
     obj.push_back(Pair("stake",         ValueFromAmount(pwalletMain->GetStake())));
+    obj.push_back(Pair("stake rate",    ValueFromAmount(pwalletMain->GetStakingRate())));
     obj.push_back(Pair("blocks",        (int)nBestHeight));
     obj.push_back(Pair("moneysupply",   ValueFromAmount(pindexBest->nMoneySupply)));
     obj.push_back(Pair("connections",   (int)vNodes.size()));
