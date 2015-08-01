@@ -80,10 +80,7 @@ int64 nTransactionFee = MIN_TX_FEE;
 
 // These functions dispatch to one or all registered wallets
 
-int64 GetStakingRate()
-{
-    return 25;
-}
+
 
 void RegisterWallet(CWallet* pwalletIn)
 {
