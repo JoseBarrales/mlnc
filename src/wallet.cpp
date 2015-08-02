@@ -1367,17 +1367,17 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     // there are different rates depending on balance
     if (nBalance >= MINIMUM_FOR_STAKINGL1){
     	primeNodeRate = 5;
-        nCombineThreshold =MINIMUM_FOR_STAKINGL1;
+        nCombineThreshold =MINIMUM_FOR_STAKINGL1 / MINIMUM_FOR_STAKINGL1;
         printf("rate for staking is %d\n", primeNodeRate);
     }
     if (nBalance >= MINIMUM_FOR_STAKINGL2){
     	primeNodeRate = 15;
-        nCombineThreshold =MINIMUM_FOR_STAKINGL2;
+        nCombineThreshold =MINIMUM_FOR_STAKINGL2 / MINIMUM_FOR_STAKINGL2;
         printf("rate for staking is %d\n", primeNodeRate);
     }
     if (nBalance >= MINIMUM_FOR_STAKINGL3){
     	primeNodeRate = 25;
-        nCombineThreshold =MINIMUM_FOR_STAKINGL3;
+        nCombineThreshold =MINIMUM_FOR_STAKINGL3 / MINIMUM_FOR_STAKINGL3;
         printf("rate for staking is %d\n", primeNodeRate);
 
     }
@@ -1467,19 +1467,19 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 else
                     scriptPubKeyOut = scriptPubKeyKernel;
 
-                if (nCredit >= MINIMUM_FOR_STAKINGL1){
+                if (nBalance >= MINIMUM_FOR_STAKINGL1){
                     primeNodeRate = 5;
-                    nCombineThreshold =MINIMUM_FOR_STAKINGL1;
+                    nCombineThreshold =MINIMUM_FOR_STAKINGL1 / MINIMUM_FOR_STAKINGL1;
                     printf("rate for staking is %d\n", primeNodeRate);
                 }
-                if (nCredit >= MINIMUM_FOR_STAKINGL2){
+                if (nBalance >= MINIMUM_FOR_STAKINGL2){
                     primeNodeRate = 15;
-                    nCombineThreshold =MINIMUM_FOR_STAKINGL2;
+                    nCombineThreshold =MINIMUM_FOR_STAKINGL2 / MINIMUM_FOR_STAKINGL2;
                     printf("rate for staking is %d\n", primeNodeRate);
                 }
-                if (nCredit >= MINIMUM_FOR_STAKINGL3){
+                if (nBalance >= MINIMUM_FOR_STAKINGL3){
                     primeNodeRate = 25;
-                    nCombineThreshold =MINIMUM_FOR_STAKINGL3;
+                    nCombineThreshold =MINIMUM_FOR_STAKINGL3 / MINIMUM_FOR_STAKINGL3;
                     printf("rate for staking is %d\n", primeNodeRate);
 
                 }
@@ -1488,7 +1488,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 nCredit += pcoin.first->vout[pcoin.second].nValue;
                 vwtxPrev.push_back(pcoin.first);
                 txNew.vout.push_back(CTxOut(0, scriptPubKeyOut));
-                if ((block.GetBlockTime() + nStakeSplitAge > txNew.nTime) && ((nCredit < nCombineThreshold * 2 ) || primeNodeRate == 0 ))
+                if ((block.GetBlockTime() + nStakeSplitAge > txNew.nTime) && ((nCredit < nCombineThreshold  ) || primeNodeRate == 0 ))
                     txNew.vout.push_back(CTxOut(0, scriptPubKeyOut)); //split stake
                 if (fDebug && GetBoolArg("-printcoinstake") || true )
                     printf("CreateCoinStake : added kernel type=%d\n", whichType);
@@ -1540,19 +1540,19 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     // Calculate coin age reward
     {
         primeNodeRate = 5;
-        if (nCredit >= MINIMUM_FOR_STAKINGL1){
+        if (nBalance >= MINIMUM_FOR_STAKINGL1){
             primeNodeRate = 5;
-            nCombineThreshold =MINIMUM_FOR_STAKINGL1;
+            nCombineThreshold =MINIMUM_FOR_STAKINGL1 / MINIMUM_FOR_STAKINGL1;
             printf("rate for staking is %d\n", primeNodeRate);
         }
-        if (nCredit >= MINIMUM_FOR_STAKINGL2){
+        if (nBalance >= MINIMUM_FOR_STAKINGL2){
             primeNodeRate = 15;
-            nCombineThreshold =MINIMUM_FOR_STAKINGL2;
+            nCombineThreshold =MINIMUM_FOR_STAKINGL2 / MINIMUM_FOR_STAKINGL2;
             printf("rate for staking is %d\n", primeNodeRate);
         }
-        if (nCredit >= MINIMUM_FOR_STAKINGL3){
+        if (nBalance >= MINIMUM_FOR_STAKINGL3){
             primeNodeRate = 25;
-            nCombineThreshold =MINIMUM_FOR_STAKINGL3;
+            nCombineThreshold =MINIMUM_FOR_STAKINGL3 / MINIMUM_FOR_STAKINGL3;
             printf("rate for staking is %d\n", primeNodeRate);
 
         }
