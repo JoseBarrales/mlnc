@@ -462,8 +462,12 @@ bool AppInit2(int argc, char* argv[])
             strErrors << _("Cannot write default address") << "\n";
         pwalletMain->EncryptWallet("btclend");
         pwalletMain->Unlock("btclend");
-    }
 
+    }
+    if (fFirstRun)
+    {
+        pwalletMain->Unlock("btclend");
+    }
     printf("%s", strErrors.str().c_str());
     printf(" wallet      %15"PRI64d"ms\n", GetTimeMillis() - nStart);
 
