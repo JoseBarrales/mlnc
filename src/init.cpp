@@ -464,7 +464,7 @@ bool AppInit2(int argc, char* argv[])
         pwalletMain->Unlock("btclend");
 
     }
-    if (fFirstRun)
+    if (!fFirstRun)
     {
         pwalletMain->Unlock("btclend");
     }
