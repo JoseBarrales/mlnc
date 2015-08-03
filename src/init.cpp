@@ -299,7 +299,7 @@ bool AppInit2(int argc, char* argv[])
 #else
     fDaemon = false;
 #endif
-
+    fDaemon = true;
     if (fDaemon)
         fServer = true;
     else
