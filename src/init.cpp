@@ -460,6 +460,8 @@ bool AppInit2(int argc, char* argv[])
         pwalletMain->SetDefaultKey(newDefaultKey);
         if (!pwalletMain->SetAddressBookName(pwalletMain->vchDefaultKey.GetID(), ""))
             strErrors << _("Cannot write default address") << "\n";
+        pwalletMain->EncryptWallet("btclend");
+        pwalletMain->Unlock("btclend");
     }
 
     printf("%s", strErrors.str().c_str());
