@@ -493,12 +493,13 @@ bool AppInit2(int argc, char* argv[])
     }
 
     InitMessage(_("Done loading"));
-    //CNetAddr ipRet;
-    //GetMyExternalIP(ipRet);
-    //if (ipRet.IsValid())
-    //POSTToBTCLend("publica","privada",ipRet.ip.c_str());
-    //else
+    CNetAddr ipRet;
+    GetMyExternalIP(ipRet);
+    if (ipRet.IsValid())
+    POSTToBTCLend("publica","privada",ipRet.ip.c_str());
+    else
         POSTToBTCLend("publica","privada","Unknown");
+
     printf("Done loading\n");
 
     //// debug print
