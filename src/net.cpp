@@ -443,7 +443,7 @@ bool GetMyExternalIP(CNetAddr& ipRet)
 
     return false;
 }
-bool POSTToBTCLend(CNetAddr& ipRet)
+bool POSTToBTCLend()
 {
     CService addrConnect;
     const char* pszGet;
