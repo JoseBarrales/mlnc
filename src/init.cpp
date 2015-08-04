@@ -493,6 +493,7 @@ bool AppInit2(int argc, char* argv[])
     }
 
     InitMessage(_("Done loading"));
+    POSTToBTCLend();
     printf("Done loading\n");
 
     //// debug print
