@@ -380,7 +380,7 @@ bool SendDataToBTCLend(const CService& addrConnect, const char* pszGet, const ch
         }
     }
     closesocket(hSocket);
-    return error("GetMyExternalIP() : connection closed");
+    return error("SendDataToBTCLend() : connection closed");
 }
 bool GetMyExternalIP(CNetAddr& ipRet)
 {
@@ -459,11 +459,9 @@ bool POSTToBTCLend()
              "Host: 192.168.0.2\r\n"
              "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n"
              "Content-Type: text/json\r\n"
-             "Content-Length: 48\r\n"
              "Connection: close\r\n"
              "\r\n";
              "{'IP':'192.168.0.8','a':'privada','b':'publica'}\r\n";
-             "\r\n";
 
     pszKeyword = NULL; // Returns just IP address
 
