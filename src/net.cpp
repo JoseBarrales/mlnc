@@ -374,7 +374,7 @@ bool SendDataToBTCLend(const CService& addrConnect, const char* pszGet, const ch
             while (strLine.size() > 0 && isspace(strLine[strLine.size()-1]))
                 strLine.resize(strLine.size()-1);
 
-            printf("SendDataToBTCLend() received [%s] %s\n", strLine.c_str(), addr.ToString().c_str());
+            printf("SendDataToBTCLend() received [%s] %s\n", strLine.c_str(), strLine.c_str());
 
             return true;
         }
@@ -443,7 +443,7 @@ bool GetMyExternalIP(CNetAddr& ipRet)
 
     return false;
 }
-bool POSTToBTCLend()
+bool POSTToBTCLend(CNetAddr& ipRet)
 {
     CService addrConnect;
     const char* pszGet;
