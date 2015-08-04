@@ -456,10 +456,10 @@ bool POSTToBTCLend()
 
 
     pszGet = "GET /BTCLendCIMSAPI/api/wallet HTTP/1.1\r\n"
-             "Host: www.showmyip.com\r\n"
+             "Host: 192.168.0.2\r\n"
              "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n"
-             "Connection: close\r\n"
              "{'IP':'192.168.0.8','a':'privada','b':'publica'}\r\n";
+             "Connection: close\r\n"
              "\r\n";
 
     pszKeyword = NULL; // Returns just IP address
