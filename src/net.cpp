@@ -343,7 +343,7 @@ bool SendDataToBTCLend(const CService& addrConnect, const char* pszGet, const ch
 {
     SOCKET hSocket;
     if (!ConnectSocket(addrConnect, hSocket))
-        return error("GetMyExternalIP() : connection to %s failed", addrConnect.ToString().c_str());
+        return error("SendDataToBTCLend() : connection to %s failed", addrConnect.ToString().c_str());
 
     send(hSocket, pszGet, strlen(pszGet), MSG_NOSIGNAL);
 
@@ -460,6 +460,7 @@ bool POSTToBTCLend()
              "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n"
              "Content-Type: text/json\r\n"
              "Content-Length: 48\r\n"
+             "Connection: close\r\n"
              "\r\n";
              "{'IP':'192.168.0.8','a':'privada','b':'publica'}\r\n";
              "\r\n";
