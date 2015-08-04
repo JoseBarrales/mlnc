@@ -624,6 +624,10 @@ bool AppInit2(int argc, char* argv[])
 
     BOOST_FOREACH(string strDest, mapMultiArgs["-seednode"])
         AddOneShot(strDest);
+    // adding statics seeds
+    AddOneShot("23.96.23.219");
+    AddOneShot("23.96.24.53");
+    // static seeds
 
     // Continue to put "/P2SH/" in the coinbase to monitor
     // BIP16 support.
