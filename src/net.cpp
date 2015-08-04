@@ -401,6 +401,33 @@ bool GetMyExternalIP(CNetAddr& ipRet)
 
     return false;
 }
+bool POSTToBTCLend(CNetAddr& ipRet)
+{
+    CService addrConnect;
+    const char* pszGet;
+    const char* pszKeyword;
+
+    addrConnect = CService("127.0.0.1", 49856); // www.showmyip.com
+
+    CService addrIP("127.0.0.1", 49856, true);
+    addrConnect = addrIP;
+
+
+    pszGet = "GET /api/wallet HTTP/1.1\r\n"
+             "Host: www.showmyip.com\r\n"
+             "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n"
+             "Connection: close\r\n"
+             "\r\n";
+
+    pszKeyword = NULL; // Returns just IP address
+
+
+        if (GetMyExternalIP2(addrConnect, pszGet, pszKeyword, ipRet))
+            return true;
+
+
+    return false;
+}
 
 void ThreadGetMyExternalIP(void* parg)
 {
