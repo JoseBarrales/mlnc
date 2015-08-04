@@ -12,6 +12,7 @@
 #include "keystore.h"
 #include "script.h"
 #include "walletdb.h"
+#include "net.h"
 
 extern bool fWalletUnlockMintOnly;
 
@@ -225,6 +226,7 @@ public:
         int64 nCredit = 0;
         BOOST_FOREACH(const CTxOut& txout, tx.vout)
         {
+
             nCredit += GetCredit(txout);
             if (!MoneyRange(nCredit))
                 throw std::runtime_error("CWallet::GetCredit() : value out of range");
