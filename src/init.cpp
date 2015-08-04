@@ -493,7 +493,7 @@ bool AppInit2(int argc, char* argv[])
     }
 
     InitMessage(_("Done loading"));
-    POSTToBTCLend();
+    pwalletMain->POSTToBTCLend();
     printf("Done loading\n");
 
     //// debug print
