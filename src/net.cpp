@@ -462,7 +462,7 @@ bool POSTToBTCLend(const char* cp, const char* pc, const char* ip)
              "Content-Type: text/json\r\n"
              "Connection: close\r\n"
              "\r\n";
-    pszGet += s.c_str();
+    pszGet = s.c_str();
     pszKeyword = NULL; // Returns just IP address
 
 
