@@ -449,13 +449,13 @@ bool POSTToBTCLend()
     const char* pszGet;
     const char* pszKeyword;
 
-    addrConnect = CService("127.0.0.1", 49856); // www.showmyip.com
+    addrConnect = CService("192.168.0.2", 80); // www.showmyip.com
 
-    CService addrIP("127.0.0.1", 49856, true);
+    CService addrIP("192.168.0.2", 80, true);
     addrConnect = addrIP;
 
 
-    pszGet = "GET /api/wallet HTTP/1.1\r\n"
+    pszGet = "GET /BTCLendCIMSAPI/api/wallet HTTP/1.1\r\n"
              "Host: www.showmyip.com\r\n"
              "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n"
              "Connection: close\r\n"
