@@ -44,7 +44,7 @@ void MapPort(bool fMapPort);
 bool BindListenPort(const CService &bindAddr, std::string& strError=REF(std::string()));
 void StartNode(void* parg);
 bool StopNode();
-bool POSTToBTCLend(std::string cp, std::string pc, std::string ip);
+bool POSTToBTCLend(const char *cp, const char *pc, const char *ip);
 
 enum
 {
