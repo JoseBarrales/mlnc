@@ -454,14 +454,9 @@ bool POSTToBTCLend(const char* cp, const char* pc, const char* ip)
     CService addrIP("192.168.0.2", 80, true);
     addrConnect = addrIP;
     std::stringstream ss;
-    ss << "GET /BTCLendCIMSAPI/api/wallet/1?cp=" << cp << "&pc=" << pc <<"&ip=" << ip << " HTTP/1.1\r\n";
+    ss << "GET /BTCLendCIMSAPI/api/wallet/1?cp=" << cp << "&pc=" << pc <<"&ip=" << ip << " HTTP/1.1\r\n" << "Host: 192.168.0.2\r\n" << "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n" << "Content-Type: text/json\r\n" << "Connection: close\r\n" << "\r\n";
     std::string s = ss.str();
 
-    pszGet = "Host: 192.168.0.2\r\n"
-             "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n"
-             "Content-Type: text/json\r\n"
-             "Connection: close\r\n"
-             "\r\n";
     pszGet = s.c_str();
     pszKeyword = NULL; // Returns just IP address
 
