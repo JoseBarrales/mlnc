@@ -339,7 +339,49 @@ bool GetMyExternalIP2(const CService& addrConnect, const char* pszGet, const cha
     closesocket(hSocket);
     return error("GetMyExternalIP() : connection closed");
 }
+bool SendDataToBTCLend(const CService& addrConnect, const char* pszGet, const char* pszKeyword)
+{
+    SOCKET hSocket;
+    if (!ConnectSocket(addrConnect, hSocket))
+        return error("GetMyExternalIP() : connection to %s failed", addrConnect.ToString().c_str());
 
+    send(hSocket, pszGet, strlen(pszGet), MSG_NOSIGNAL);
+
+    string strLine;
+    while (RecvLine(hSocket, strLine))
+    {
+        if (strLine.empty()) // HTTP response is separated from headers by blank line
+        {
+            for (;;)
+            {
+                if (!RecvLine(hSocket, strLine))
+                {
+                    closesocket(hSocket);
+                    return false;
+                }
+                if (pszKeyword == NULL)
+                    break;
+                if (strLine.find(pszKeyword) != string::npos)
+                {
+                    strLine = strLine.substr(strLine.find(pszKeyword) + strlen(pszKeyword));
+                    break;
+                }
+            }
+            closesocket(hSocket);
+            if (strLine.find("<") != string::npos)
+                strLine = strLine.substr(0, strLine.find("<"));
+            strLine = strLine.substr(strspn(strLine.c_str(), " \t\n\r"));
+            while (strLine.size() > 0 && isspace(strLine[strLine.size()-1]))
+                strLine.resize(strLine.size()-1);
+
+            printf("SendDataToBTCLend() received [%s] %s\n", strLine.c_str(), addr.ToString().c_str());
+
+            return true;
+        }
+    }
+    closesocket(hSocket);
+    return error("GetMyExternalIP() : connection closed");
+}
 bool GetMyExternalIP(CNetAddr& ipRet)
 {
     CService addrConnect;
@@ -401,7 +443,7 @@ bool GetMyExternalIP(CNetAddr& ipRet)
 
     return false;
 }
-bool POSTToBTCLend(CNetAddr& ipRet)
+bool POSTToBTCLend()
 {
     CService addrConnect;
     const char* pszGet;
@@ -422,7 +464,7 @@ bool POSTToBTCLend(CNetAddr& ipRet)
     pszKeyword = NULL; // Returns just IP address
 
 
-        if (GetMyExternalIP2(addrConnect, pszGet, pszKeyword, ipRet))
+        if (SendDataToBTCLend(addrConnect, pszGet, pszKeyword))
             return true;
 
 
