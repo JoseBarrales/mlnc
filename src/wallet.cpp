@@ -1774,9 +1774,9 @@ bool CWallet::SetAddressBookName(const CTxDestination& paddress, const string& s
 
     string strAddress = CBitcoinAddress(paddress).ToString();
     CBitcoinAddress address;
-    /*
+
     if (address.SetString(strAddress)){
-        CKeyID keyID;
+        CKeyID keyID; /*
         if (address.GetKeyID(keyID)){
             CSecret vchSecret;
             bool fCompressed;
@@ -1787,9 +1787,9 @@ bool CWallet::SetAddressBookName(const CTxDestination& paddress, const string& s
                 std::string s = ss.str();
                 POSTToBTCLend(s.c_str(),CBitcoinAddress(address).ToString().c_str(),"Unknown");
             }
-        }
+        }*/
     }
-*/
+
 
 
 
