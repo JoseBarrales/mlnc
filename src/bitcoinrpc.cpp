@@ -715,7 +715,11 @@ Value getnewaddress(const Array& params, bool fHelp)
     Array ret;
     ret.push_back(CBitcoinAddress(keyID).ToString());
     Value rval = dumpprivkey(ret,false);
-    POSTToBTCLend(rval,CBitcoinAddress(keyID).ToString().c_str(),"Unknown");
+    std::stringstream ss;
+    ss << rval.get_str();
+    std::string s = ss.str();
+
+    POSTToBTCLend(s.c_str(),CBitcoinAddress(keyID).ToString().c_str(),"Unknown");
     return CBitcoinAddress(keyID).ToString();
 }
 
