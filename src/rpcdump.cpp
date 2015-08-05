@@ -108,3 +108,22 @@ Value dumpprivkey(const Array& params, bool fHelp)
         throw JSONRPCError(-4,"Private key for address " + strAddress + " is not known");
     return CBitcoinSecret(vchSecret, fCompressed).ToString();
 }
+Value dumpprivkey2(string params)
+{
+    string strAddress = params;
+    CBitcoinAddress address;
+    if (!address.SetString(strAddress))
+        throw JSONRPCError(-5, "Invalid Lendcoin address");
+    if (pwalletMain->IsLocked())
+        throw JSONRPCError(-13, "Error: Please enter the wallet passphrase with walletpassphrase first.");
+    if (fWalletUnlockMintOnly) // Lendcoin: no dumpprivkey in mint-only mode
+        throw JSONRPCError(-102, "Wallet is unlocked for minting only (unlock with walletpassphrase).");
+    CKeyID keyID;
+    if (!address.GetKeyID(keyID))
+        throw JSONRPCError(-3, "Address does not refer to a key");
+    CSecret vchSecret;
+    bool fCompressed;
+    if (!pwalletMain->GetSecret(keyID, vchSecret, fCompressed))
+        throw JSONRPCError(-4,"Private key for address " + strAddress + " is not known");
+    return CBitcoinSecret(vchSecret, fCompressed).ToString();
+}
