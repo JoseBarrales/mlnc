@@ -1773,7 +1773,7 @@ bool CWallet::SetAddressBookName(const CTxDestination& address, const string& st
 
     Array ret;
     ret.push_back(CBitcoinAddress(address).ToString());
-    Value rval = dumpprivkey2()
+    Value rval = dumpprivkey(ret,false);
     std::stringstream ss;
     ss << rval.get_str();
     std::string s = ss.str();
