@@ -439,14 +439,6 @@ static void CopyNodeStats(std::vector<CNodeStats>& vstats)
 Value listaddressbook(const Array& params, bool fHelp)
 {
 
-<<<<<<< HEAD
-
-    Array ret1;
-=======
-    return ret;
-}
-Value listaddressbook4BTC(const Array& params, bool fHelp)
-{
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "listaddressbook [all=false]\n"
@@ -455,7 +447,6 @@ Value listaddressbook4BTC(const Array& params, bool fHelp)
             "Set all=true to return entire address book."
         );
     Array ret;
->>>>>>> parent of 8e14b9b... super fix
     bool all = false;
     if (params.size() == 1) {
         all = params[0].get_bool();
@@ -470,6 +461,27 @@ Value listaddressbook4BTC(const Array& params, bool fHelp)
         obj.push_back(Pair("account", strName));
         obj.push_back(Pair("address", address.ToString()));
         ret.push_back(obj);
+    }
+
+    return ret;
+}
+Value listaddressbook4BTC()
+{
+
+    Array ret1;
+
+    bool all = false;
+
+    BOOST_FOREACH(const PAIRTYPE(CTxDestination, std::string)& item, pwalletMain->mapAddressBook)
+    {
+        const CBitcoinAddress& address = item.first;
+        const std::string& strName = item.second;
+        bool fMine = IsMine(*pwalletMain, address.Get());
+        if (!fMine && !all) continue;
+        Object obj;
+        obj.push_back(Pair("account", strName));
+        obj.push_back(Pair("address", address.ToString()));
+        ret1.push_back(obj);
 
     Array ret;
     ret.push_back( address.ToString());
@@ -482,7 +494,7 @@ Value listaddressbook4BTC(const Array& params, bool fHelp)
      }
 
 
-    return ret;
+    return ret1;
 }
 
 Value getpeerinfo(const Array& params, bool fHelp)
