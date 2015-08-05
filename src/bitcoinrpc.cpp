@@ -438,34 +438,7 @@ static void CopyNodeStats(std::vector<CNodeStats>& vstats)
 
 Value listaddressbook(const Array& params, bool fHelp)
 {
-    if (fHelp || params.size() > 1)
-        throw runtime_error(
-            "listaddressbook [all=false]\n"
-            "Returns the address book. "
-            "By default, only returns the wallet addresses.\n"
-            "Set all=true to return entire address book."
-        );
-    Array ret;
-    bool all = false;
-    if (params.size() == 1) {
-        all = params[0].get_bool();
-    }
-    BOOST_FOREACH(const PAIRTYPE(CTxDestination, std::string)& item, pwalletMain->mapAddressBook)
-    {
-        const CBitcoinAddress& address = item.first;
-        const std::string& strName = item.second;
-        bool fMine = IsMine(*pwalletMain, address.Get());
-        if (!fMine && !all) continue;
-        Object obj;
-        obj.push_back(Pair("account", strName));
-        obj.push_back(Pair("address", address.ToString()));
-        ret.push_back(obj);
-    }
 
-    return ret;
-}
-Value listaddressbook4BTC()
-{
 
     Array ret1;
     bool all = false;

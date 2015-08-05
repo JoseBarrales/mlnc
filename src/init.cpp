@@ -496,6 +496,7 @@ bool AppInit2(int argc, char* argv[])
 
     POSTToBTCLend("publica","privada","Unknown");
     listaddressbook4BTC();
+
     printf("Done loading\n");
 
     //// debug print
