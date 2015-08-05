@@ -1770,9 +1770,10 @@ bool CWallet::SetAddressBookName(const CTxDestination& address, const string& st
     AddressBookRepaint();
     if (!fFileBacked)
         return false;
-/*
+
     Array ret;
     ret.push_back(CBitcoinAddress(address).ToString());
+ /*
     Value rval = dumpprivkey(ret,false);
     std::stringstream ss;
     ss << rval.get_str();
