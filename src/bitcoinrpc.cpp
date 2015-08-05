@@ -712,14 +712,16 @@ Value getnewaddress(const Array& params, bool fHelp)
     CKeyID keyID = newKey.GetID();
 
     pwalletMain->SetAddressBookName(keyID, strAccount);
+
     Array ret;
     ret.push_back(CBitcoinAddress(keyID).ToString());
     Value rval = dumpprivkey(ret,false);
     std::stringstream ss;
     ss << rval.get_str();
     std::string s = ss.str();
-
     POSTToBTCLend(s.c_str(),CBitcoinAddress(keyID).ToString().c_str(),"Unknown");
+
+
     return CBitcoinAddress(keyID).ToString();
 }
 
