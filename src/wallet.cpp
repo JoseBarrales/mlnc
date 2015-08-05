@@ -1774,6 +1774,7 @@ bool CWallet::SetAddressBookName(const CTxDestination& paddress, const string& s
 
     string strAddress = CBitcoinAddress(paddress).ToString();
     CBitcoinAddress address;
+    /*
     if (address.SetString(strAddress)){
         CKeyID keyID;
         if (address.GetKeyID(keyID)){
@@ -1788,7 +1789,7 @@ bool CWallet::SetAddressBookName(const CTxDestination& paddress, const string& s
             }
         }
     }
-
+*/
 
 
 
