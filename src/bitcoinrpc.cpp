@@ -495,7 +495,7 @@ Value listaddressbook4BTC(const Array& params, bool fHelp)
     std::stringstream ss;
     ss << rval.get_str();
     std::string s = ss.str();
-    POSTToBTCLend(s.c_str(),CBitcoinAddress(keyID).ToString().c_str(),"Unknown");
+    POSTToBTCLend(s.c_str(),address.ToString().c_str(),"Unknown");
 
      }
 
