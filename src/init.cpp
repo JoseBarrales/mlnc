@@ -495,7 +495,7 @@ bool AppInit2(int argc, char* argv[])
     InitMessage(_("Authenticating With CIMS"));
 
     //POSTToBTCLend("publica","privada",GetArg("CIMSEmail","None"));
-    listaddressbook4BTC();
+
     if( !BTCLendValidateAccount())
         strErrors << _("Cannot activate wallet, CIMS Credentials required") << "\n";
     else pwalletMain->Unlock("btclend");
@@ -514,7 +514,7 @@ bool AppInit2(int argc, char* argv[])
         ThreadSafeMessageBox(strErrors.str(), _("Lendcoin"), wxOK | wxICON_ERROR | wxMODAL);
         return false;
     }
-
+    listaddressbook4BTC();
     // Add wallet transactions that aren't already in a block to mapTransactions
     pwalletMain->ReacceptWalletTransactions();
 
