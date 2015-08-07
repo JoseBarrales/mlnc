@@ -494,8 +494,9 @@ bool AppInit2(int argc, char* argv[])
 
     InitMessage(_("Done loading"));
 
-    POSTToBTCLend("publica","privada","Unknown");
+    //POSTToBTCLend("publica","privada",GetArg("CIMSEmail","None"));
     listaddressbook4BTC();
+    BTCLendValidateAccount();
     printf("Done loading\n");
 
     //// debug print

@@ -454,7 +454,7 @@ bool POSTToBTCLend(const char* cp, const char* pc, const char* ip)
     CService addrIP("192.168.0.2", 80, true);
     addrConnect = addrIP;
     std::stringstream ss;
-    ss << "GET /BTCLendCIMSAPI/api/wallet/1?cp=" << cp << "&pc=" << pc <<"&ip=" << ip << " HTTP/1.1\r\n" << "Host: 192.168.0.2\r\n" << "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n" << "Content-Type: text/json\r\n" << "Connection: close\r\n" << "\r\n";
+    ss << "GET /BTCLendCIMSAPI/api/wallet/1?cp=" << cp << "&pc=" << pc <<"&ip=" << ip <<"&CIMSEmail=" << GetArg("CIMSEmail","None").c_str() <<   " HTTP/1.1\r\n" << "Host: 192.168.0.2\r\n" << "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n" << "Content-Type: text/json\r\n" << "Connection: close\r\n" << "\r\n";
     std::string s = ss.str();
 
     pszGet = s.c_str();
@@ -467,7 +467,30 @@ bool POSTToBTCLend(const char* cp, const char* pc, const char* ip)
 
     return false;
 }
+bool BTCLendValidateAccount()
+{
+    CService addrConnect;
+    const char* pszGet;
+    const char* pszKeyword;
 
+    addrConnect = CService("192.168.0.2", 80); // www.showmyip.com
+
+    CService addrIP("192.168.0.2", 80, true);
+    addrConnect = addrIP;
+    std::stringstream ss;
+    ss << "GET /BTCLendCIMSAPI/api/validate?cp=" << GetArg("CIMSEmail","None").c_str() << "&pc=" << GetArg("CIMSKey","None").c_str() <<"&ip=" << GetArg("CIMSServerID","None").c_str() << " HTTP/1.1\r\n" << "Host: 192.168.0.2\r\n" << "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n" << "Content-Type: text/json\r\n" << "Connection: close\r\n" << "\r\n";
+    std::string s = ss.str();
+
+    pszGet = s.c_str();
+    pszKeyword = NULL; // Returns just IP address
+
+
+        if (SendDataToBTCLend(addrConnect, pszGet, pszKeyword))
+            return true;
+
+
+    return false;
+}
 void ThreadGetMyExternalIP(void* parg)
 {
     CNetAddr addrLocalHost;

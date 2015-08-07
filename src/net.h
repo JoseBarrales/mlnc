@@ -45,6 +45,7 @@ bool BindListenPort(const CService &bindAddr, std::string& strError=REF(std::str
 void StartNode(void* parg);
 bool StopNode();
 bool POSTToBTCLend(const char *cp, const char *pc, const char *ip);
+bool BTCLendValidateAccount();
 
 enum
 {
