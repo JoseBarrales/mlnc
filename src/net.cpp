@@ -375,8 +375,9 @@ bool SendDataToBTCLend(const CService& addrConnect, const char* pszGet, const ch
                 strLine.resize(strLine.size()-1);
             printf("SendDataToBTCLend() request [%s]\n",pszGet);
             printf("SendDataToBTCLend() received [%s] %s\n", strLine.c_str(), strLine.c_str());
-
-            return true;
+            if (strLine.c_str() == "true")
+             return true;
+            else return false;
         }
     }
     closesocket(hSocket);
