@@ -1048,7 +1048,7 @@ unsigned int static GetNextTargetRequired(const CBlockIndex* pindexLast, bool fP
     if (pindexPrevPrev->pprev == NULL)
         return fProofOfStake ? bnProofOfStakeLimit.GetCompact() : bnInitialHashTarget.GetCompact(); // second block
 
-    if (!fProofOfStake && pindexLast->nHeight >= 3 && pindexLast->nHeight < 20000)
+    if (!fProofOfStake && pindexLast->nHeight >= 23 && pindexLast->nHeight < 10000)
         return bnProofOfWorkLimit.GetCompact(); // most of the 1st 120 blocks
 
         // lendcoin: block stuck at 227
