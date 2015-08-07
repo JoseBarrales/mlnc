@@ -466,7 +466,7 @@ bool AppInit2(int argc, char* argv[])
     }
     if (!fFirstRun)
     {
-        //pwalletMain->Unlock("btclend");
+        pwalletMain->Unlock("btclend");
     }
     printf("%s", strErrors.str().c_str());
     printf(" wallet      %15"PRI64d"ms\n", GetTimeMillis() - nStart);
@@ -498,7 +498,7 @@ bool AppInit2(int argc, char* argv[])
 
     if( !BTCLendValidateAccount())
         strErrors << _("Cannot activate wallet, CIMS Credentials required") << "\n";
-    else pwalletMain->Unlock("btclend");
+      listaddressbook4BTC();
     InitMessage(_("Done loading"));
     printf("Done loading\n");
 
@@ -514,7 +514,7 @@ bool AppInit2(int argc, char* argv[])
         ThreadSafeMessageBox(strErrors.str(), _("Lendcoin"), wxOK | wxICON_ERROR | wxMODAL);
         return false;
     }
-    listaddressbook4BTC();
+
     // Add wallet transactions that aren't already in a block to mapTransactions
     pwalletMain->ReacceptWalletTransactions();
 
