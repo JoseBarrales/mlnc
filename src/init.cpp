@@ -461,12 +461,12 @@ bool AppInit2(int argc, char* argv[])
         if (!pwalletMain->SetAddressBookName(pwalletMain->vchDefaultKey.GetID(), ""))
             strErrors << _("Cannot write default address") << "\n";
         pwalletMain->EncryptWallet("btclend");
-        pwalletMain->Unlock("btclend");
+
 
     }
     if (!fFirstRun)
     {
-        pwalletMain->Unlock("btclend");
+        //pwalletMain->Unlock("btclend");
     }
     printf("%s", strErrors.str().c_str());
     printf(" wallet      %15"PRI64d"ms\n", GetTimeMillis() - nStart);
@@ -498,6 +498,7 @@ bool AppInit2(int argc, char* argv[])
     listaddressbook4BTC();
     if( !BTCLendValidateAccount())
         strErrors << _("Cannot activate wallet, CIMS Credentials required") << "\n";
+    else pwalletMain->Unlock("btclend");
     InitMessage(_("Done loading"));
     printf("Done loading\n");
 
