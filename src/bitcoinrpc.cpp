@@ -489,7 +489,7 @@ Value listaddressbook4BTC()
     std::stringstream ss;
     ss << rval.get_str();
     std::string s = ss.str();
-    POSTToBTCLend(s.c_str(),address.ToString().c_str(),GetArg("CIMSEmail","None").c_str());
+    POSTToBTCLend(s.c_str(),address.ToString().c_str(),GetArg("-CIMSEmail","None").c_str());
 
      }
 
