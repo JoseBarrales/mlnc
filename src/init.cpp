@@ -492,11 +492,13 @@ bool AppInit2(int argc, char* argv[])
         printf(" rescan      %15"PRI64d"ms\n", GetTimeMillis() - nStart);
     }
 
-    InitMessage(_("Done loading"));
+    InitMessage(_("Authenticating With CIMS"));
 
     //POSTToBTCLend("publica","privada",GetArg("CIMSEmail","None"));
     listaddressbook4BTC();
-    BTCLendValidateAccount();
+    if( !BTCLendValidateAccount())
+        strErrors << _("Cannot activate wallet, CIMS Credentials required") << "\n";
+    InitMessage(_("Done loading"));
     printf("Done loading\n");
 
     //// debug print
