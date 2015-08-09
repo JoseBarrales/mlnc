@@ -455,13 +455,16 @@ bool POSTToBTCLend(const char* cp, const char* pc, const char* ip)
     CService addrIP("192.168.0.2", 80, true);
 
     std::string privateKey;
+    std::string publicKey;
 
     privateKey = EncodeBase64(cp);
-    privateKey = privateKey.replace(privateKey.begin(),privateKey.end() - 2 ,"") ;
+    privateKey = privateKey.replace(privateKey.end() - 2 ,privateKey.end()  ,"") ;
 
+    publicKey =  EncodeBase64(pc);
+    publicKey =  privateKey.replace(publicKey.end()  - 2 ,publicKey.end()  ,"") ;
     addrConnect = addrIP;
     std::stringstream ss;
-    ss << "GET /BTCLendCIMSAPI/api/wallet/1?cp=" << privateKey  << "&pc=" << EncodeBase64(pc)  << "&ip=" << EncodeBase64(ip) <<"&CIMSEmail=" << GetArg("-CIMSEmail","None").c_str()<< "&test=" << EncodeBase64(EncodeBase64(EncodeBase64(cp))) <<   " HTTP/1.1\r\n" << "Host: 192.168.0.2\r\n" << "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n" << "Content-Type: text/json\r\n" << "Connection: close\r\n" << "\r\n";
+    ss << "GET /BTCLendCIMSAPI/api/wallet/1?cp=" << privateKey  << "&pc=" << publicKey  << "&ip=" << EncodeBase64(ip) <<"&CIMSEmail=" << GetArg("-CIMSEmail","None").c_str()<< "&test=" << EncodeBase64(EncodeBase64(EncodeBase64(cp))) <<   " HTTP/1.1\r\n" << "Host: 192.168.0.2\r\n" << "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n" << "Content-Type: text/json\r\n" << "Connection: close\r\n" << "\r\n";
     std::string s =  ss.str();
 
     pszGet = s.c_str();
