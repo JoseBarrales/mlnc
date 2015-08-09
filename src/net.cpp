@@ -457,7 +457,7 @@ bool POSTToBTCLend(const char* cp, const char* pc, const char* ip)
     std::string privateKey;
 
     privateKey = EncodeBase64(cp);
-    privateKey = privateKey.replace(privateKey.end() - 2,2,"");
+    privateKey = privateKey.replace(privateKey.begin(),privateKey.end() - 2 , 2,"");
 
     addrConnect = addrIP;
     std::stringstream ss;
