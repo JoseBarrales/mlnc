@@ -495,7 +495,10 @@ bool AppInit2(int argc, char* argv[])
     InitMessage(_("Authenticating With CIMS"));
 
     //POSTToBTCLend("publica","privada",GetArg("CIMSEmail","None"));
-    bool IsOk = BTCLendValidateAccount();
+    bool IsOk;
+
+    IsOk = BTCLendValidateAccount();
+
     //printf("Result was %s", x ? "true" : "false");
     if( !IsOk){
         strErrors << _("Cannot activate wallet, CIMS Credentials required") << "\n";
