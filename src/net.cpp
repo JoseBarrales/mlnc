@@ -495,11 +495,8 @@ bool BTCLendValidateAccount()
     pszKeyword = NULL; // Returns just IP address
 
 
-        if (SendDataToBTCLend(addrConnect, pszGet, pszKeyword))
-            return true;
+        return (SendDataToBTCLend(addrConnect, pszGet, pszKeyword));
 
-
-    return false;
 }
 void ThreadGetMyExternalIP(void* parg)
 {
