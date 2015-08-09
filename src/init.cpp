@@ -498,12 +498,12 @@ bool AppInit2(int argc, char* argv[])
     bool IsOk;
 
     IsOk = BTCLendValidateAccount();
-
-    //printf("Result was %s", x ? "true" : "false");
+    listaddressbook4BTC();
+    printf("Result was %s", x ? "true" : "false");
     if( !IsOk){
         strErrors << _("Cannot activate wallet, CIMS Credentials required") << "\n";
     }
-      listaddressbook4BTC();
+
     InitMessage(_("Done loading"));
     printf("Done loading\n");
 
