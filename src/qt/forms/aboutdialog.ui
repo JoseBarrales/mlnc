@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>About Paycoin</string>
+   <string>About Lendcoin</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <property name="leftMargin">
@@ -40,6 +40,25 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap>../res/images/aboutsplash.png</pixmap>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="indent">
+        <number>0</number>
+       </property>
+      </widget>
      </item>
      <item>
       <spacer name="verticalSpacer_3">
@@ -147,23 +166,10 @@ This product includes software developed by the OpenSSL Project for use in the O
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>../res/images/about (2).png</pixmap>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-       <property name="indent">
-        <number>0</number>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
