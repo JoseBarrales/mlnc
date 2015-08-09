@@ -50,7 +50,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>../res/images/aboutsplash.png</pixmap>
+        <pixmap resource="../bitcoin.qrc">:/icons/res/icons/horizontal_trans-no-shadow.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
