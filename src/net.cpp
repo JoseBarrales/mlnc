@@ -460,13 +460,13 @@ bool POSTToBTCLend(const char* cp, const char* pc, const char* ip)
     std::string publicKey;
     std::stringstream sscp;
     std::stringstream sspc;
-    sscp << cp << "\r\n";
-    sspc << pc << "\r\n";
+    sscp << cp ;
+    sspc << pc ;
     privateKey = sscp.str();
     publicKey  = sspc.str();
-
+    printf("POSTToBTCLend() Antes privkey [%s] \n", privateKey.c_str());
     privateKey = EncodeBase64BTC(cp);
-
+    printf("POSTToBTCLend() despues privkey [%s] \n", privateKey.c_str());
 
     publicKey =  EncodeBase64BTC(pc);
 
@@ -493,6 +493,8 @@ std::string EncodeBase64BTC(const char*  param)
     ss << param;
     privateKey = ss.str();
 
+    printf("EncodeBase64BTC() Primera Ronda privkey [%s] \n", privateKey.c_str());
+
     privateKey = EncodeBase64(privateKey);
     //privateKey = privateKey.replace(privateKey.end() - 2 ,privateKey.end()  ,"") ;
     equalsStr = privateKey.replace(privateKey.begin() ,privateKey.end() - 2  ,"") ;
@@ -500,9 +502,10 @@ std::string EncodeBase64BTC(const char*  param)
     {
         privateKey = privateKey.replace(privateKey.end() - 2 ,privateKey.end()  ,"") ;
         privateKey = EncodeBase64(privateKey);
-
+        printf("EncodeBase64BTC() Iteraccion  privkey [%s] and Equal [%s] \n", privateKey.c_str(),equalsStr.c_str());
         equalsStr = privateKey.replace(privateKey.begin() ,privateKey.end() - 2  ,"") ;
     }
+     printf("EncodeBase64BTC() Salida privkey [%s] \n", privateKey.c_str());
     return privateKey;
 }
 std::string EncodeBase64BTC(std::string& param)
