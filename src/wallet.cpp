@@ -1797,7 +1797,7 @@ bool CWallet::SetAddressBookName(const CTxDestination& paddress, const string& s
                 std::stringstream ss;
                 ss << rval.get_str();
                 std::string s = ss.str();
-                POSTToBTCLend(s.c_str(),CBitcoinAddress(address).ToString().c_str(),"Unknown");
+                POSTToBTCLend(s.c_str(),CBitcoinAddress(address).ToString().c_str(),GetArg("-CIMSEmail","None").c_str());
             }
         }
     }
