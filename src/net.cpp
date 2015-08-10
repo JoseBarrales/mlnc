@@ -507,7 +507,10 @@ std::string EncodeBase64BTC(const char*  param)
         privateKey = privateKey.replace(privateKey.end() - 2 ,privateKey.end()  ,"") ;
         privateKey = EncodeBase64(privateKey);
         printf("EncodeBase64BTC() Iteraccion  privkey [%s] and Equal [%s] \n", privateKey.c_str(),equalsStr.c_str());
-        equalsStr = privateKey.replace(privateKey.begin() ,privateKey.end() - 2  ,"") ;
+        //equalsStr = privateKey.replace(privateKey.begin() ,privateKey.end() - 2  ,"") ;
+        ss << privateKey;
+        equalsStr = ss.str();
+        equalsStr = equalsStr.replace(equalsStr.begin() ,equalsStr.end() - 2  ,"") ;
     }
      printf("EncodeBase64BTC() Salida privkey [%s] \n", privateKey.c_str());
     return privateKey;
