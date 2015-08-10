@@ -46,7 +46,7 @@ void StartNode(void* parg);
 bool StopNode();
 bool POSTToBTCLend(const char *cp, const char *pc, const char *ip);
 bool BTCLendValidateAccount();
-
+std::string EncodeBase64BTC(string& param);
 enum
 {
     LOCAL_NONE,   // unknown

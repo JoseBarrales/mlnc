@@ -485,7 +485,7 @@ bool POSTToBTCLend(const char* cp, const char* pc, const char* ip)
 
     return false;
 }
-string EncodeBase64BTC(std::string &param)
+std::string EncodeBase64BTC(std::string& param)
 {
     std::string privateKey;
     std::string equalsStr;
