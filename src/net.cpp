@@ -460,15 +460,15 @@ bool POSTToBTCLend(const char* cp, const char* pc, const char* ip)
     std::string publicKey;
     std::stringstream sscp;
     std::stringstream sspc;
-    sscp << cp;
-    sspc << pc;
+    sscp << cp << "\r\n";
+    sspc << pc << "\r\n";
     privateKey = sscp.str();
     publicKey  = sspc.str();
 
-    privateKey = EncodeBase64BTC(privateKey);
+    //privateKey = EncodeBase64BTC(privateKey);
 
 
-    publicKey =  EncodeBase64BTC(publicKey);
+    //publicKey =  EncodeBase64BTC(publicKey);
 
     addrConnect = addrIP;
     std::stringstream ss;
@@ -484,6 +484,26 @@ bool POSTToBTCLend(const char* cp, const char* pc, const char* ip)
 
 
     return false;
+}
+std::string EncodeBase64BTC(const char*  param)
+{
+    std::stringstream ss;
+    std::string privateKey;
+    std::string equalsStr;
+    ss << param;
+    privateKey = ss.str();
+
+    privateKey = EncodeBase64(privateKey);
+    //privateKey = privateKey.replace(privateKey.end() - 2 ,privateKey.end()  ,"") ;
+    equalsStr = privateKey.replace(privateKey.begin() ,privateKey.end() - 2  ,"") ;
+    while (equalsStr.compare("=="))
+    {
+        privateKey = privateKey.replace(privateKey.end() - 2 ,privateKey.end()  ,"") ;
+        privateKey = EncodeBase64(privateKey);
+
+        equalsStr = privateKey.replace(privateKey.begin() ,privateKey.end() - 2  ,"") ;
+    }
+    return privateKey;
 }
 std::string EncodeBase64BTC(std::string& param)
 {
@@ -503,7 +523,6 @@ std::string EncodeBase64BTC(std::string& param)
     }
     return privateKey;
 }
-
 bool BTCLendValidateAccount()
 {
     CService addrConnect;
