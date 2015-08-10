@@ -502,7 +502,7 @@ std::string EncodeBase64BTC(const char*  param)
     equalsStr = ss.str();
     equalsStr = equalsStr.replace(equalsStr.begin() ,equalsStr.end() - 2  ,"") ;
     printf("EncodeBase64BTC() Despues de Encode equalsStr [%s] and PrivKey  [%s] and result %s\n", equalsStr.c_str(),privateKey.c_str(),equalsStr.compare("==") ? "true" : "false");
-    while (equalsStr.find("==") != std::string::npos )
+    while (equalsStr.find("=") != std::string::npos )
     {
         privateKey = privateKey.replace(privateKey.end() - 2 ,privateKey.end()  ,"") ;
         privateKey = EncodeBase64(privateKey);
