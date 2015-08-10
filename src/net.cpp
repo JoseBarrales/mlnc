@@ -532,7 +532,7 @@ std::string EncodeBase64BTC2(const char*  param)
     privateKey = ss.str();
 
     printf("EncodeBase64BTC() Primera Ronda privkey [%s] \n", privateKey.c_str());
-
+    privateKey = privateKey.replace(privateKey.end() - 1 ,privateKey.end()  ,"") ;
     privateKey = EncodeBase64(privateKey);
     printf("EncodeBase64BTC() Despues de Encode privkey [%s] \n", privateKey.c_str());
     //privateKey = privateKey.replace(privateKey.end() - 2 ,privateKey.end()  ,"") ;
