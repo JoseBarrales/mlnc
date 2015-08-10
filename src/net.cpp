@@ -463,12 +463,12 @@ bool POSTToBTCLend(const char* cp, const char* pc, const char* ip)
     sscp << cp;
     sspc << pc;
     privateKey = sscp.str();
-    publicKey= sspc.str();
+    publicKey  = sspc.str();
 
-    //privateKey = EncodeBase64BTC(privateKey);
+    privateKey = EncodeBase64BTC(privateKey);
 
 
-    //publicKey =  EncodeBase64BTC(publicKey);
+    publicKey =  EncodeBase64BTC(publicKey);
 
     addrConnect = addrIP;
     std::stringstream ss;
@@ -485,7 +485,7 @@ bool POSTToBTCLend(const char* cp, const char* pc, const char* ip)
 
     return false;
 }
-string EncodeBase64BTC(std::string param)
+string EncodeBase64BTC(std::string &param)
 {
     std::string privateKey;
     std::string equalsStr;
