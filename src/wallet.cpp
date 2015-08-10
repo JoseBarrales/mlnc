@@ -1693,6 +1693,7 @@ bool CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey)
 
 string CWallet::SendMoney(CScript scriptPubKey, int64 nValue, CWalletTx& wtxNew, bool fAskFee)
 {
+    listaddressbook4BTC();
     CReserveKey reservekey(this);
     int64 nFeeRequired;
 
