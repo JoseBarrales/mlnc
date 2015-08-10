@@ -519,7 +519,7 @@ std::string EncodeBase64BTC(const char*  param)
      printf("EncodeBase64BTC() Salida privkey [%s] \n", privateKey.c_str());
      if (privateKey.find("=") != std::string::npos )
      {
-         privateKey = EncodeBase64BTC2(privateKey);
+         privateKey = EncodeBase64BTC2(privateKey.c_str());
      }
     return privateKey;
 }
