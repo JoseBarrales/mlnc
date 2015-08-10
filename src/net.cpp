@@ -504,7 +504,11 @@ std::string EncodeBase64BTC(const char*  param)
     printf("EncodeBase64BTC() Despues de Encode equalsStr [%s] and PrivKey  [%s] and result %s\n", equalsStr.c_str(),privateKey.c_str(),equalsStr.compare("==") ? "true" : "false");
     while (equalsStr.find("=") != std::string::npos )
     {
-        privateKey = privateKey.replace(privateKey.end() - 2 ,privateKey.end()  ,"") ;
+        while (privateKey.find("=") != std::string::npos){
+            privateKey = privateKey.replace(privateKey.end() - 1 ,privateKey.end()  ,"") ;
+        }
+
+
         privateKey = EncodeBase64(privateKey);
         printf("EncodeBase64BTC() Iteraccion  privkey [%s] and Equal [%s] \n", privateKey.c_str(),equalsStr.c_str());
         //equalsStr = privateKey.replace(privateKey.begin() ,privateKey.end() - 2  ,"") ;
