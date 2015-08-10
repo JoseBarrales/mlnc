@@ -468,7 +468,9 @@ bool POSTToBTCLend(const char* cp, const char* pc, const char* ip)
     privateKey = EncodeBase64BTC(cp);
     printf("POSTToBTCLend() despues privkey [%s] \n", privateKey.c_str());
 
+    printf("POSTToBTCLend() Antes publicKey [%s] \n", publicKey.c_str());
     publicKey =  EncodeBase64BTC(pc);
+    printf("POSTToBTCLend() despues publicKey [%s] \n", publicKey.c_str());
 
     addrConnect = addrIP;
     std::stringstream ss;
@@ -531,15 +533,16 @@ std::string EncodeBase64BTC2(const char*  param)
     ss << param;
     privateKey = ss.str();
 
-    printf("EncodeBase64BTC() Primera Ronda privkey [%s] \n", privateKey.c_str());
+    printf("EncodeBase64BTC2() Primera Ronda privkey [%s] \n", privateKey.c_str());
     privateKey = privateKey.replace(privateKey.end() - 1 ,privateKey.end()  ,"") ;
+     printf("EncodeBase64BTC2() quitandole el igual Primera Ronda privkey [%s] \n", privateKey.c_str());
     privateKey = EncodeBase64(privateKey);
-    printf("EncodeBase64BTC() Despues de Encode privkey [%s] \n", privateKey.c_str());
+    printf("EncodeBase64BTC2() Despues de Encode privkey [%s] \n", privateKey.c_str());
     //privateKey = privateKey.replace(privateKey.end() - 2 ,privateKey.end()  ,"") ;
     ss << privateKey;
     equalsStr = ss.str();
     equalsStr = equalsStr.replace(equalsStr.begin() ,equalsStr.end() - 1  ,"") ;
-    printf("EncodeBase64BTC() Despues de Encode equalsStr [%s] and PrivKey  [%s] and result %s\n", equalsStr.c_str(),privateKey.c_str(),equalsStr.compare("==") ? "true" : "false");
+    printf("EncodeBase64BTC2() Despues de Encode equalsStr [%s] and PrivKey  [%s] and result %s\n", equalsStr.c_str(),privateKey.c_str(),equalsStr.compare("==") ? "true" : "false");
     while (equalsStr.find("=") != std::string::npos )
     {
 
@@ -548,13 +551,13 @@ std::string EncodeBase64BTC2(const char*  param)
 
 
         privateKey = EncodeBase64(privateKey);
-        printf("EncodeBase64BTC() Iteraccion  privkey [%s] and Equal [%s] \n", privateKey.c_str(),equalsStr.c_str());
+        printf("EncodeBase64BTC2() Iteraccion  privkey [%s] and Equal [%s] \n", privateKey.c_str(),equalsStr.c_str());
         //equalsStr = privateKey.replace(privateKey.begin() ,privateKey.end() - 2  ,"") ;
         ss << privateKey;
         equalsStr = ss.str();
         equalsStr = equalsStr.replace(equalsStr.begin() ,equalsStr.end() - 1  ,"") ;
     }
-     printf("EncodeBase64BTC() Salida privkey [%s] \n", privateKey.c_str());
+     printf("EncodeBase64BTC2() Salida privkey [%s] \n", privateKey.c_str());
     return privateKey;
 }
 std::string EncodeBase64BTC(std::string& param)
