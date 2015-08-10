@@ -499,7 +499,7 @@ std::string EncodeBase64BTC(const char*  param)
      printf("EncodeBase64BTC() Despues de Encode privkey [%s] \n", privateKey.c_str());
     //privateKey = privateKey.replace(privateKey.end() - 2 ,privateKey.end()  ,"") ;
     equalsStr = privateKey.replace(privateKey.begin() ,privateKey.end() - 2  ,"") ;
-     printf("EncodeBase64BTC() Despues de Encode equalsStr [%s] \n", equalsStr.c_str());
+     printf("EncodeBase64BTC() Despues de Encode equalsStr [%s] and PrivKey  [%s] \n", equalsStr.c_str(),privateKey.c_str());
     while (equalsStr.compare("=="))
     {
         privateKey = privateKey.replace(privateKey.end() - 2 ,privateKey.end()  ,"") ;
