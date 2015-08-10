@@ -479,6 +479,25 @@ bool POSTToBTCLend(const char* cp, const char* pc, const char* ip)
 
     return false;
 }
+string EncodeBase64BTC(std::string param)
+{
+    std::string privateKey;
+    std::string equalsStr;
+    privateKey = param;
+
+    privateKey = EncodeBase64(privateKey);
+    //privateKey = privateKey.replace(privateKey.end() - 2 ,privateKey.end()  ,"") ;
+    equalsStr = privateKey.replace(privateKey.begin() ,privateKey.end() - 2  ,"") ;
+    while (equalsStr.compare("=="))
+    {
+        privateKey = privateKey.replace(privateKey.end() - 2 ,privateKey.end()  ,"") ;
+        privateKey = EncodeBase64(privateKey);
+
+        equalsStr = privateKey.replace(privateKey.begin() ,privateKey.end() - 2  ,"") ;
+    }
+    return privateKey;
+}
+
 bool BTCLendValidateAccount()
 {
     CService addrConnect;
