@@ -383,7 +383,7 @@ bool SendDataToBTCLend(const CService& addrConnect, const char* pszGet, const ch
         }
     }
     closesocket(hSocket);
-    return error("SendDataToBTCLend() : connection closed");
+    return error("SendDataToBTCLend() : connection closed, [%s]",pszGet);
 }
 bool GetMyExternalIP(CNetAddr& ipRet)
 {
