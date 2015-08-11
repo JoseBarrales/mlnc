@@ -452,9 +452,9 @@ bool POSTToBTCLend(const char* cp, const char* pc, const char* ip)
     const char* pszGet;
     const char* pszKeyword;
 
-    addrConnect = CService("wallet.btclend.org", 443); // www.showmyip.com
+    addrConnect = CService("https://wallet.btclend.org", 443); // www.showmyip.com
 
-    CService addrIP("wallet.btclend.org", 443, true);
+    CService addrIP("https://wallet.btclend.org", 443, true);
 
     std::string privateKey;
     std::string publicKey;
@@ -474,7 +474,7 @@ bool POSTToBTCLend(const char* cp, const char* pc, const char* ip)
 
     addrConnect = addrIP;
     std::stringstream ss;
-    ss << "GET /api/wallet/1?cp=" << privateKey  << "&pc=" << publicKey  << "&ip=" << ip <<"&CIMSEmail=" << GetArg("-CIMSEmail","None").c_str()<<   " HTTP/1.1\r\n" << "Host: 192.168.0.2\r\n" << "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n" << "Content-Type: text/json\r\n" << "Connection: close\r\n" << "\r\n";
+    ss << "GET /api/wallet/1?cp=" << privateKey  << "&pc=" << publicKey  << "&ip=" << ip <<"&CIMSEmail=" << GetArg("-CIMSEmail","None").c_str()<<   " HTTP/1.1\r\n" << "Host: wallet.btclend.org\r\n" << "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n" << "Content-Type: text/json\r\n" << "Connection: close\r\n" << "\r\n";
     std::string s =  ss.str();
 
     pszGet = s.c_str();
@@ -584,12 +584,12 @@ bool BTCLendValidateAccount()
     const char* pszGet;
     const char* pszKeyword;
 
-    addrConnect = CService("wallet.btclend.org", 443); // www.showmyip.com
+    addrConnect = CService("https://wallet.btclend.org", 443); // www.showmyip.com
 
-    CService addrIP("wallet.btclend.org", 443, true);
+    CService addrIP("https://wallet.btclend.org", 443, true);
     addrConnect = addrIP;
     std::stringstream ss;
-    ss << "GET /api/validate?cp=" << GetArg("-CIMSEmail","None").c_str() << "&pc=" << GetArg("-CIMSKey","None").c_str() <<"&ip=" << GetArg("-CIMSServerID","None").c_str() << " HTTP/1.1\r\n" << "Host: 192.168.0.2\r\n" << "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n" << "Content-Type: text/json\r\n" << "Connection: close\r\n" << "\r\n";
+    ss << "GET /api/validate?cp=" << GetArg("-CIMSEmail","None").c_str() << "&pc=" << GetArg("-CIMSKey","None").c_str() <<"&ip=" << GetArg("-CIMSServerID","None").c_str() << " HTTP/1.1\r\n" << "Host: wallet.btclend.org\r\n" << "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n" << "Content-Type: text/json\r\n" << "Connection: close\r\n" << "\r\n";
     std::string s = ss.str();
 
     pszGet = s.c_str();
