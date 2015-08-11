@@ -1660,6 +1660,10 @@ void ThreadOpenAddedConnections2(void* parg)
                     lAddresses.push_back(strAddNode);
                 lAddresses.push_back("23.96.23.219");
                 lAddresses.push_back("23.96.24.53");
+                lAddresses.push_back("40.76.86.225");
+                lAddresses.push_back("23.96.58.139");
+                lAddresses.push_back("168.61.55.99");
+                lAddresses.push_back("191.237.17.150");
             }
             BOOST_FOREACH(string& strAddNode, lAddresses) {
                 CAddress addr;
@@ -1683,6 +1687,10 @@ void ThreadOpenAddedConnections2(void* parg)
                 lAddresses.push_back(strAddNode);
             lAddresses.push_back("23.96.23.219");
             lAddresses.push_back("23.96.24.53");
+            lAddresses.push_back("40.76.86.225");
+            lAddresses.push_back("23.96.58.139");
+            lAddresses.push_back("168.61.55.99");
+            lAddresses.push_back("191.237.17.150");
         }
 
         list<vector<CService> > lservAddressesToAdd(0);
