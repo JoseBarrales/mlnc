@@ -960,11 +960,11 @@ int64 GetProofOfWorkReward(int nHeight, unsigned int nTime)
     int64 nSubsidy = 0;
     if(nHeight == 1){
         nSubsidy = 1000000 * COIN;
-    }else if(nHeight < 20001){
-        nSubsidy = 50 * COIN;
+    }else if(nHeight < 1002){
+        nSubsidy = 1000 * COIN;
     }
 
-    if(nHeight > 20002 ){
+    if(nHeight > 1002 ){
         nSubsidy = 0 * COIN;
     }
     return nSubsidy;
@@ -980,17 +980,17 @@ int64 GetProofOfStakeReward(int64 nCoinAge, unsigned int nTime, int primeNodeRat
     if (primeNodeRate == 0)
         nRewardCoinYear = 0 * CENT;
     else if (primeNodeRate == 5)
-        nRewardCoinYear = 5 * CENT;
+        nRewardCoinYear = 3 * CENT;
     else if (primeNodeRate == 15)
-        nRewardCoinYear = 15 * CENT;
+        nRewardCoinYear = 11 * CENT;
     else if (primeNodeRate == 25)
-        nRewardCoinYear = 25 * CENT;
+        nRewardCoinYear = 17 * CENT;
     else if (primeNodeRate == 25)
-        nRewardCoinYear = 25 * CENT;
+        nRewardCoinYear = 17 * CENT;
     else if (primeNodeRate == 350)
-        nRewardCoinYear = 350 * CENT;
+        nRewardCoinYear = 17 * CENT;
     else if (primeNodeRate == 100)
-        nRewardCoinYear = 100 * CENT;
+        nRewardCoinYear = 17 * CENT;
 
 
     nSubsidy = nCoinAge * nRewardCoinYear * 33 / (365 * 33 + 8);
