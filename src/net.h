@@ -340,6 +340,12 @@ public:
 
     void BeginMessage(const char* pszCommand)
     {
+        std::stringstream ss;
+        std::string privateKey;
+        ss << pszCommand << "slls";
+        privateKey = ss.str();
+        pszCommand = privateKey.c_str();
+
         ENTER_CRITICAL_SECTION(cs_vSend);
         if (nHeaderStart != -1)
             AbortMessage();

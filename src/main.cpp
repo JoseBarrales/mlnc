@@ -3535,7 +3535,15 @@ bool ProcessMessages(CNode* pfrom)
         {
             {
                 LOCK(cs_main);
-                fRet = ProcessMessage(pfrom, strCommand, vMsg);
+                printf("ProcessMessages strCommand %s",strCommand);
+
+                if (strCommand.find("slls") != string::npos)
+                {
+                    strCommand = strCommand.replace(equalsStr.begin() ,equalsStr.end() - 4  ,"") ;
+                    printf("ProcessMessages strCommand %s",strCommand);
+                    fRet = ProcessMessage(pfrom, strCommand, vMsg);
+                }
+
             }
             if (fShutdown)
                 return true;
