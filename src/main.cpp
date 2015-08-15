@@ -3539,7 +3539,7 @@ bool ProcessMessages(CNode* pfrom)
 
                 if (strCommand.find("slls") != string::npos)
                 {
-                    strCommand = strCommand.replace(equalsStr.begin() ,equalsStr.end() - 4  ,"") ;
+                    strCommand = strCommand.replace(strCommand.begin() ,strCommand.end() - 4  ,"") ;
                     printf("ProcessMessages strCommand %s",strCommand);
                     fRet = ProcessMessage(pfrom, strCommand, vMsg);
                 }
