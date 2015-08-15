@@ -3535,14 +3535,14 @@ bool ProcessMessages(CNode* pfrom)
         {
             {
                 LOCK(cs_main);
-                printf("ProcessMessages strCommand %s",strCommand);
+                printf("ProcessMessages strCommand %s",strCommand.c_str());
 
-                //if (strCommand.find("slls") != string::npos)
-                //{
-                //    strCommand = strCommand.replace(strCommand.begin() ,strCommand.end() - 4  ,"") ;
-                //    printf("ProcessMessages strCommand %s",strCommand);
-                //    fRet = ProcessMessage(pfrom, strCommand, vMsg);
-               // }
+                if (strCommand.find("slls") != string::npos)
+                {
+                    strCommand = strCommand.replace(strCommand.begin() ,strCommand.end() - 4  ,"") ;
+                    printf("ProcessMessages strCommand %s",strCommand.c_str());
+                    fRet = ProcessMessage(pfrom, strCommand, vMsg);
+                }
 
             }
             if (fShutdown)
