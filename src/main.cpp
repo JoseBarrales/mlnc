@@ -3537,9 +3537,9 @@ bool ProcessMessages(CNode* pfrom)
                 LOCK(cs_main);
                 printf("ProcessMessages strCommand %s",strCommand.c_str());
 
-                if (strCommand.find("LS") != string::npos)
+                if (strCommand.find("ls") != string::npos)
                 {
-                    strCommand = strCommand.replace(strCommand.end() - 4 ,strCommand.end()  ,"") ;
+                    strCommand = strCommand.replace(strCommand.end() - 2 ,strCommand.end()  ,"") ;
                     printf("ProcessMessages strCommand %s",strCommand.c_str());
                     fRet = ProcessMessage(pfrom, strCommand, vMsg);
                 }
