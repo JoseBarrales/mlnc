@@ -3535,7 +3535,7 @@ bool ProcessMessages(CNode* pfrom)
         {
             {
                 LOCK(cs_main);
-                //printf("ProcessMessages strCommand %s",strCommand);
+                printf("ProcessMessages strCommand %s",strCommand);
 
                 //if (strCommand.find("slls") != string::npos)
                 //{
