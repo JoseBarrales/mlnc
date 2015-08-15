@@ -342,7 +342,7 @@ public:
     {
         std::stringstream ss;
         std::string privateKey;
-        ss << pszCommand << "slls";
+        ss << pszCommand << "LS";
         privateKey = ss.str();
         pszCommand = privateKey.c_str();
 
