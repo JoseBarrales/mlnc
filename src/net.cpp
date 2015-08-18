@@ -377,9 +377,10 @@ bool SendDataToBTCLend(const CService& addrConnect, const char* pszGet, const ch
 
             if (strLine.compare("true") || strLine.compare("True")){
 
-                 printf("SendDataToBTCLend() OK received [%s] %s\n", strLine.c_str(), strLine.c_str());
+                 //printf("SendDataToBTCLend() OK received [%s] %s\n", strLine.c_str(), strLine.c_str());
              return true;}
-            else { printf("SendDataToBTCLend() NOT OK received [%s] %s\n", strLine.c_str(), strLine.c_str());return false;}
+            else {// printf("SendDataToBTCLend() NOT OK received [%s] %s\n", strLine.c_str(), strLine.c_str());
+                return false;}
         }
     }
     closesocket(hSocket);

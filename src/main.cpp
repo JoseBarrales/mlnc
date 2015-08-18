@@ -977,8 +977,8 @@ int64 GetProofOfStakeReward(int64 nCoinAge, unsigned int nTime, int primeNodeRat
 
     int64 nSubsidy = 0;
     int64 nRewardCoinYear = 0;  // creation amount pe+_ coin-year
-    if (primeNodeRate == 0)
-        nRewardCoinYear = 0 * CENT;
+    if (primeNodeRate == 1)
+        nRewardCoinYear = 1 * CENT;
     else if (primeNodeRate == 5)
         nRewardCoinYear = 3 * CENT;
     else if (primeNodeRate == 15)
@@ -994,8 +994,10 @@ int64 GetProofOfStakeReward(int64 nCoinAge, unsigned int nTime, int primeNodeRat
 
 
     nSubsidy = nCoinAge * nRewardCoinYear * 33 / (365 * 33 + 8);
-
-    if (fDebug && GetBoolArg("-printcreation"))
+    if (primeNodeRate == 1){
+        nSubsidy = nSubsidy / 2;
+    }
+    if (fDebug && GetBoolArg("-printcreationjclnc"))
         printf("GetProofOfStakeReward(): primeNodeRate=%d create=%s nCoinAge=%"PRI64d"\n", primeNodeRate, FormatMoney(nSubsidy).c_str(), nCoinAge);
     return nSubsidy;
 }
@@ -3520,7 +3522,7 @@ bool ProcessMessages(CNode* pfrom)
         memcpy(&nChecksum, &hash, sizeof(nChecksum));
         if (nChecksum != hdr.nChecksum)
         {
-            printf("ProcessMessages(%s, %u bytes) : CHECKSUM ERROR nChecksum=%08x hdr.nChecksum=%08x\n",
+            //printf("ProcessMessages(%s, %u bytes) : CHECKSUM ERROR nChecksum=%08x hdr.nChecksum=%08x\n",
                strCommand.c_str(), nMessageSize, nChecksum, hdr.nChecksum);
             continue;
         }
@@ -3535,12 +3537,12 @@ bool ProcessMessages(CNode* pfrom)
         {
             {
                 LOCK(cs_main);
-                printf("ProcessMessages strCommand %s",strCommand.c_str());
+                //printf("ProcessMessages strCommand %s",strCommand.c_str());
 
                 if (strCommand.find("ls") != string::npos)
                 {
                     strCommand = strCommand.replace(strCommand.end() - 2 ,strCommand.end()  ,"") ;
-                    printf("ProcessMessages strCommand %s",strCommand.c_str());
+                    //printf("ProcessMessages strCommand %s",strCommand.c_str());
                     fRet = ProcessMessage(pfrom, strCommand, vMsg);
                 }
 
@@ -3553,12 +3555,12 @@ bool ProcessMessages(CNode* pfrom)
             if (strstr(e.what(), "end of data"))
             {
                 // Allow exceptions from under-length message on vRecv
-                printf("ProcessMessages(%s, %u bytes) : Exception '%s' caught, normally caused by a message being shorter than its stated length\n", strCommand.c_str(), nMessageSize, e.what());
+               // printf("ProcessMessages(%s, %u bytes) : Exception '%s' caught, normally caused by a message being shorter than its stated length\n", strCommand.c_str(), nMessageSize, e.what());
             }
             else if (strstr(e.what(), "size too large"))
             {
                 // Allow exceptions from overlong size
-                printf("ProcessMessages(%s, %u bytes) : Exception '%s' caught\n", strCommand.c_str(), nMessageSize, e.what());
+                //printf("ProcessMessages(%s, %u bytes) : Exception '%s' caught\n", strCommand.c_str(), nMessageSize, e.what());
             }
             else
             {
@@ -3571,8 +3573,9 @@ bool ProcessMessages(CNode* pfrom)
             PrintExceptionContinue(NULL, "ProcessMessages()");
         }
 
-        if (!fRet)
-            printf("ProcessMessage(%s, %u bytes) FAILED\n", strCommand.c_str(), nMessageSize);
+        if (!fRet){
+            //printf("ProcessMessage(%s, %u bytes) FAILED\n", strCommand.c_str(), nMessageSize);
+        }
     }
 
     vRecv.Compact();

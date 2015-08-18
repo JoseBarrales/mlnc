@@ -1385,7 +1385,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     }
     if (GetBoolArg("-isserver"))
     {
-          primeNodeRate = 0;
+          primeNodeRate = 1;
     }
     // Whatever the balance is whe set as threshold to avoid spliting
    // nCombineThreshold = nBalance;
@@ -1490,7 +1490,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 }
                 if (GetBoolArg("-isserver"))
                 {
-                      primeNodeRate = 0;
+                      primeNodeRate = 1;
                 }
                 txNew.nTime -= n;
                 txNew.vin.push_back(CTxIn(pcoin.first->GetHash(), pcoin.second));
@@ -1568,7 +1568,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         }
         if (GetBoolArg("-isserver"))
         {
-              primeNodeRate = 0;
+              primeNodeRate = 1;
         }
 
 
