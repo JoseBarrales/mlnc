@@ -994,9 +994,7 @@ int64 GetProofOfStakeReward(int64 nCoinAge, unsigned int nTime, int primeNodeRat
 
 
     nSubsidy = nCoinAge * nRewardCoinYear * 33 / (365 * 33 + 8);
-    if (primeNodeRate == 1){
-        nSubsidy = nSubsidy / 4;
-    }
+    //if (primeNodeRate == 1){nSubsidy = nSubsidy / 4;}
     if (fDebug && GetBoolArg("-printcreationjclnc"))
         printf("GetProofOfStakeReward(): primeNodeRate=%d create=%s nCoinAge=%"PRI64d"\n", primeNodeRate, FormatMoney(nSubsidy).c_str(), nCoinAge);
     return nSubsidy;
