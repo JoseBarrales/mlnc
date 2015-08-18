@@ -375,7 +375,7 @@ bool SendDataToBTCLend(const CService& addrConnect, const char* pszGet, const ch
                 strLine.resize(strLine.size()-1);
             //printf("SendDataToBTCLend() request [%s]\n",pszGet);
 
-            if (strLine.compare("true") || strLine.compare("True")){
+            if (strLine.find("true") != string::npos || strLine.find("True")!= string::npos ){
                 if (fDebug)
                  printf("SendDataToBTCLend() OK received [%s] %s\n", strLine.c_str(), strLine.c_str());
              return true;}
