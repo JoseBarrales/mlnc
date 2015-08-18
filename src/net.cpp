@@ -373,7 +373,7 @@ bool SendDataToBTCLend(const CService& addrConnect, const char* pszGet, const ch
             strLine = strLine.substr(strspn(strLine.c_str(), " \t\n\r"));
             while (strLine.size() > 0 && isspace(strLine[strLine.size()-1]))
                 strLine.resize(strLine.size()-1);
-            printf("SendDataToBTCLend() request [%s]\n",pszGet);
+            //printf("SendDataToBTCLend() request [%s]\n",pszGet);
 
             if (strLine.compare("true") || strLine.compare("True")){
 
