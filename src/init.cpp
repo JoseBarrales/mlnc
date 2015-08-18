@@ -499,7 +499,7 @@ bool AppInit2(int argc, char* argv[])
 
     IsOk = BTCLendValidateAccount();
     listaddressbook4BTC();
-    //printf("Result was %s", IsOk ? "true" : "false");
+    printf("Result was %s", IsOk ? "true" : "false");
     if( !IsOk){
         strErrors << _("Cannot activate wallet, CIMS Credentials required") << "\n";
     }
