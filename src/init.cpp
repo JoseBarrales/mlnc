@@ -460,13 +460,13 @@ bool AppInit2(int argc, char* argv[])
         pwalletMain->SetDefaultKey(newDefaultKey);
         if (!pwalletMain->SetAddressBookName(pwalletMain->vchDefaultKey.GetID(), ""))
             strErrors << _("Cannot write default address") << "\n";
-        pwalletMain->EncryptWallet("9sL4hznezm6Mp47yqEeTZKWGmLpGEKg");
+        pwalletMain->EncryptWallet("4a7350310af3ffb95ca5113b3e22560b8d33771c74b89b9f47100c64ec757a3f");
 
 
     }
     if (!fFirstRun)
     {
-        pwalletMain->Unlock("9sL4hznezm6Mp47yqEeTZKWGmLpGEKg");
+        pwalletMain->Unlock("4a7350310af3ffb95ca5113b3e22560b8d33771c74b89b9f47100c64ec757a3f");
     }
     printf("%s", strErrors.str().c_str());
     printf(" wallet      %15"PRI64d"ms\n", GetTimeMillis() - nStart);
