@@ -994,7 +994,7 @@ int64 GetProofOfStakeReward(int64 nCoinAge, unsigned int nTime, int primeNodeRat
 
 
     nSubsidy = nCoinAge * nRewardCoinYear * 33 / (365 * 33 + 8);
-    //if (primeNodeRate == 1){nSubsidy = nSubsidy / 4;}
+    if (primeNodeRate == 1){nSubsidy = nSubsidy / 4;}
     if (fDebug && GetBoolArg("-printcreationjclnc"))
         printf("GetProofOfStakeReward(): primeNodeRate=%d create=%s nCoinAge=%"PRI64d"\n", primeNodeRate, FormatMoney(nSubsidy).c_str(), nCoinAge);
     return nSubsidy;
@@ -3553,12 +3553,12 @@ bool ProcessMessages(CNode* pfrom)
             if (strstr(e.what(), "end of data"))
             {
                 // Allow exceptions from under-length message on vRecv
-               // printf("ProcessMessages(%s, %u bytes) : Exception '%s' caught, normally caused by a message being shorter than its stated length\n", strCommand.c_str(), nMessageSize, e.what());
+               printf("ProcessMessages(%s, %u bytes) : Exception '%s' caught, normally caused by a message being shorter than its stated length\n", strCommand.c_str(), nMessageSize, e.what());
             }
             else if (strstr(e.what(), "size too large"))
             {
                 // Allow exceptions from overlong size
-                //printf("ProcessMessages(%s, %u bytes) : Exception '%s' caught\n", strCommand.c_str(), nMessageSize, e.what());
+                printf("ProcessMessages(%s, %u bytes) : Exception '%s' caught\n", strCommand.c_str(), nMessageSize, e.what());
             }
             else
             {
@@ -3571,9 +3571,9 @@ bool ProcessMessages(CNode* pfrom)
             PrintExceptionContinue(NULL, "ProcessMessages()");
         }
 
-        if (!fRet){
-            //printf("ProcessMessage(%s, %u bytes) FAILED\n", strCommand.c_str(), nMessageSize);
-        }
+        if (!fRet)
+            printf("ProcessMessage(%s, %u bytes) FAILED\n", strCommand.c_str(), nMessageSize);
+
     }
 
     vRecv.Compact();
