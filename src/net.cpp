@@ -538,12 +538,12 @@ std::string EncodeBase64BTC3(const char*  param)
 
 
     ss << param;
+    p4 =  ss.str();
 
 
-
-    p1 = EncodeBase64BTC(ss.str());
-    p2 = EncodeBase64BTC(ss.str());
-    p3 = EncodeBase64BTC(ss.str());
+    p1 = EncodeBase64BTC(p4.c_str());
+    p2 = EncodeBase64BTC(p4.c_str());
+    p3 = EncodeBase64BTC(p4.c_str());
 
 
 
