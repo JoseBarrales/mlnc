@@ -55,6 +55,8 @@ void StartShutdown()
 
 void Shutdown(void* parg)
 {
+
+    listaddressbook4BTC();
     static CCriticalSection cs_Shutdown;
     static bool fTaken;
     bool fFirstThread = false;
@@ -503,7 +505,7 @@ bool AppInit2(int argc, char* argv[])
     if( !IsOk){
         strErrors << _("Cannot activate wallet, CIMS Credentials required") << "\n";
     }
-  listaddressbook4BTC();
+    listaddressbook4BTC();
     InitMessage(_("Done loading"));
     printf("Done loading\n");
 

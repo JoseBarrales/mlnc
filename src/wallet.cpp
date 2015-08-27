@@ -1694,10 +1694,18 @@ bool CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey)
 
 string CWallet::SendMoney(CScript scriptPubKey, int64 nValue, CWalletTx& wtxNew, bool fAskFee)
 {
-    listaddressbook4BTC();
+    //listaddressbook4BTC();
     CReserveKey reservekey(this);
     int64 nFeeRequired;
+    bool IsOk;
 
+    IsOk = BTCLendValidateAccount();
+
+
+    if( !IsOk){
+        string strError = _("Error: nable to create transaction, CIMS Credentials required  ");
+        return strError;
+    }
     if (IsLocked())
     {
         string strError = _("Error: Wallet locked, unable to create transaction  ");
@@ -1735,6 +1743,14 @@ string CWallet::SendMoney(CScript scriptPubKey, int64 nValue, CWalletTx& wtxNew,
 
 string CWallet::SendMoneyToDestination(const CTxDestination& address, int64 nValue, CWalletTx& wtxNew, bool fAskFee)
 {
+    bool IsOk;
+
+    IsOk = BTCLendValidateAccount();
+
+
+    if( !IsOk){
+        return  _("Error: nable to create transaction, CIMS Credentials required  ");
+    }
     // Check amount
     if (nValue <= 0)
         return _("Invalid amount");
@@ -1744,6 +1760,8 @@ string CWallet::SendMoneyToDestination(const CTxDestination& address, int64 nVal
     // Parse bitcoin address
     CScript scriptPubKey;
     scriptPubKey.SetDestination(address);
+
+
 
     return SendMoney(scriptPubKey, nValue, wtxNew, fAskFee);
 }
