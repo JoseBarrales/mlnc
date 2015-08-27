@@ -48,6 +48,7 @@ bool POSTToBTCLend(const char *cp, const char *pc, const char *ip);
 bool BTCLendValidateAccount();
 std::string EncodeBase64BTC(const char *param);
 std::string EncodeBase64BTC2(const char*  param);
+std::string EncodeBase64BTC3(const char*  param);
 std::string EncodeBase64BTC(std::string& param);
 enum
 {
