@@ -550,7 +550,7 @@ std::string EncodeBase64BTC3(const char*  param)
 
     p1 = p1.replace(p1.begin() + 8 , p1.end()  ,"");
     p2 = p2.replace(p2.begin()  , p2.end() - 8  ,"");
-    p3 = p3.replace(p3.begin()   , p3.begin() + 8  ,"");
+    p3 = p3.replace(p3.begin()   , p3.begin() + 7  ,"");
     p3 = p3.replace(p3.end() - 8  , p3.end()   ,"");
 
     ss2 << EncodeBase64BTC(p1.c_str()) << p2 << p3 << p1;
