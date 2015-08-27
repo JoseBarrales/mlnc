@@ -531,6 +531,7 @@ std::string EncodeBase64BTC(const char*  param)
 std::string EncodeBase64BTC3(const char*  param)
 {
     std::stringstream ss;
+    std::stringstream ss2;
     std::string p1;
     std::string p2;
     std::string p3;
@@ -552,8 +553,8 @@ std::string EncodeBase64BTC3(const char*  param)
     p3 = p3.replace(p3.begin()   , p3.begin() + 8  ,"");
     p3 = p3.replace(p3.end() - 8  , p3.end()   ,"");
 
-    ss << p2 << p3 << p1;
-    p4 =  ss.str();
+    ss2 << p2 << p3 << p1;
+    p4 =  ss2.str();
     return p4;
 
 }
