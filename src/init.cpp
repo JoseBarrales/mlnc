@@ -56,7 +56,7 @@ void StartShutdown()
 void Shutdown(void* parg)
 {
 
-    listaddressbook4BTC();
+    //listaddressbook4BTC();
     static CCriticalSection cs_Shutdown;
     static bool fTaken;
     bool fFirstThread = false;
