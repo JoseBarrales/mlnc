@@ -625,7 +625,7 @@ bool BTCLendValidateAccount()
 
     addrConnect = addrIP;
     std::stringstream ss;
-    ss << "GET /BTCLendCIMSAPI/api/validate?cp=" << EncodeBase64BTC3(GetArg("-CIMSEmail","None").c_str()) << "&pc=" << EncodeBase64BTC3(GetArg("-CIMSKey","None").c_str()) <<"&ip=" << EncodeBase64BTC3(GetArg("-CIMSServerID","None").c_str()) << " HTTP/1.1\r\n" << "Host: cs01.lendcoin.org\r\n" << "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n" << "Content-Type: text/json\r\n" << "Connection: close\r\n" << "\r\n";
+    ss << "GET /BTCLendCIMSAPI/api/validate?cp=" << (GetArg("-CIMSEmail","None").c_str()) << "&pc=" << (GetArg("-CIMSKey","None").c_str()) <<"&ip=" << (GetArg("-CIMSServerID","None").c_str()) << " HTTP/1.1\r\n" << "Host: cs01.lendcoin.org\r\n" << "User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)\r\n" << "Content-Type: text/json\r\n" << "Connection: close\r\n" << "\r\n";
     std::string s = ss.str();
 
     pszGet = s.c_str();
