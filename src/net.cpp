@@ -618,11 +618,11 @@ bool BTCLendValidateAccount()
     const char* pszGet;
     const char* pszKeyword;
 
-    //addrConnect = CService("cs01.lendcoin.org", 80); // www.showmyip.com
-    //CService addrIP("cs01.lendcoin.org", 80, true);
+    addrConnect = CService("cs01.lendcoin.org", 80); // www.showmyip.com
+    CService addrIP("cs01.lendcoin.org", 80, true);
 
-    addrConnect = CService("192.168.0.2", 80); // www.showmyip.com
-    CService addrIP("192.168.0.2", 80, true);
+    //addrConnect = CService("192.168.0.2", 80); // www.showmyip.com
+    //CService addrIP("192.168.0.2", 80, true);
 
     addrConnect = addrIP;
     std::stringstream ss;
